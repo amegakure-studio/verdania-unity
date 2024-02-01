@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e3a3b4b4fa0612d4f9f8175095e8ced1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.0821116
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3a3b4b4fa0612d4f9f8175095e8ced1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.453
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3a3b4b4fa0612d4f9f8175095e8ced1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6029122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3a3b4b4fa0612d4f9f8175095e8ced1,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e3a3b4b4fa0612d4f9f8175095e8ced1,
         type: 3}
       propertyPath: m_Name
-      value: Corn_fruit
+      value: Corn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

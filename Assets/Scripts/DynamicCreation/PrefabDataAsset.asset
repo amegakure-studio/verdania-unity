@@ -22,3 +22,46 @@ MonoBehaviour:
   - objectName: Land
     prefab: {fileID: 4727173217026432725, guid: 7de013d7593d7a242a491a5a2b0353b9,
       type: 3}
+  - objectName: Carrot_stage1
+    prefab: {fileID: 6584586507264846862, guid: 326db8be4ff055dcba44f91463947af0,
+      type: 3}
+  - objectName: Carrot_stage2
+    prefab: {fileID: 184306643033177071, guid: 2e4bb37190b60b8f68ab8a7d32175c06, type: 3}
+  - objectName: Carrot_stage3
+    prefab: {fileID: 6857049754805290031, guid: c142070a245689ebf8ce6d11fb9a4d24,
+      type: 3}
+  - objectName: Corn_stage1
+    prefab: {fileID: 7920768050745645325, guid: 381542bf6a0906392b1af7e34518a105,
+      type: 3}
+  - objectName: Corn_stage2
+    prefab: {fileID: 1383954416582439841, guid: 6e6df6870997ad3f9a77feb12f90d919,
+      type: 3}
+  - objectName: Corn_stage3
+    prefab: {fileID: 1914715123247603859, guid: 0586fe107166e25f58f25d711ada5e15,
+      type: 3}
+  - objectName: Mushroom_stage1
+    prefab: {fileID: 1889971457654683589, guid: d82206611a2767e72a278d493f8b716c,
+      type: 3}
+  - objectName: Mushroom_stage2
+    prefab: {fileID: 6205524730822286965, guid: cdedcb6a5c7a76e90a8f52b669ad5404,
+      type: 3}
+  - objectName: Mushroom_stage3
+    prefab: {fileID: 2108789421141933779, guid: 0b361d7b1f791bf8f87519a8c7c8a90d,
+      type: 3}
+  - objectName: Onion_stage1
+    prefab: {fileID: 2129102180531364899, guid: 198756ab64d2d080d8d3afe71ba6a776,
+      type: 3}
+  - objectName: Onion_stage2
+    prefab: {fileID: 6298087245638434286, guid: 350276d7cf6888ce780e65b920751bd1,
+      type: 3}
+  - objectName: Onion_stage3
+    prefab: {fileID: 6663831589865528810, guid: 2323d77440cca0eb5973e3c45f567f68,
+      type: 3}
+  - objectName: Pumpkin_stage1
+    prefab: {fileID: 6239799345685102648, guid: 330a5cfc8e8181879a720e8ddeed0e35,
+      type: 3}
+  - objectName: Pumpkin_stage2
+    prefab: {fileID: 737373702852090925, guid: 7cc24770af65cd8b8b9b978f04badb9d, type: 3}
+  - objectName: Pumpkin_stage3
+    prefab: {fileID: 7775062511881623886, guid: 0fa0155bb6ac604d495cfaed49a50cf4,
+      type: 3}
