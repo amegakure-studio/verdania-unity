@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a47d45e2b543103aa81a90a1295a2299,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8161628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a47d45e2b543103aa81a90a1295a2299,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.125
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a47d45e2b543103aa81a90a1295a2299,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a47d45e2b543103aa81a90a1295a2299,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a47d45e2b543103aa81a90a1295a2299,
         type: 3}
       propertyPath: m_Name
-      value: Potatoe_stage3
+      value: Mushroom_stage3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
