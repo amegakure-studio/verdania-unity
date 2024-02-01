@@ -245,6 +245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Merchant
       objectReference: {fileID: 0}
+    - target: {fileID: -1728013695380148634, guid: 16a84985ac7a0d942a7a3fc45e07fb91,
+        type: 3}
+      propertyPath: m_TagString
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 2953604236389334553, guid: 16a84985ac7a0d942a7a3fc45e07fb91,
         type: 3}
       propertyPath: m_DirtyAABB

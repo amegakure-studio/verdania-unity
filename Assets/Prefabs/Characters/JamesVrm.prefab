@@ -423,6 +423,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JamesVrm
       objectReference: {fileID: 0}
+    - target: {fileID: -1728013695380148634, guid: 031c28a0be0bc3f4c8ddb10f79d7dcf0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 2953604236389334553, guid: 031c28a0be0bc3f4c8ddb10f79d7dcf0,
         type: 3}
       propertyPath: m_DirtyAABB

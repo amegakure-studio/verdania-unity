@@ -334,6 +334,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AliceVrm
       objectReference: {fileID: 0}
+    - target: {fileID: -1728013695380148634, guid: 50440203dfacf2f42b203c71f4eda9a4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 2953604236389334553, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_DirtyAABB
