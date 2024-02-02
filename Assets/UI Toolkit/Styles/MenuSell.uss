@@ -1,0 +1,38 @@
+#MenuSell .menu_container {
+    background-image: url('project://database/Assets/UI/Sprites/03/JPG/MiniPanel03.jpg?fileID=21300000&guid=b191d2220f9bc6644b50367fa92b65cf&type=3#MiniPanel03');
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    -unity-font-style: bold;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+#MenuSell .menu_header {
+    flex-grow: 0;
+    flex-basis: 30%;
+    flex-shrink: 0;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+
+#MenuSell .menu_content {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 35%;
+    justify-content: center;
+}
+
+#MenuSell .menu_footer {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+}

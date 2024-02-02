@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="SlotInventory" src="project://database/Assets/UI%20Toolkit/Documents/Components/SlotInventory.uxml?fileID=9197481963319205126&amp;guid=e24161f42825df04598466bd79736ecc&amp;type=3#SlotInventory" />
+    <ui:Template name="MenuSell" src="project://database/Assets/UI%20Toolkit/Documents/Menu/MenuSell.uxml?fileID=9197481963319205126&amp;guid=2514988db61f37440b305fea28c1afce&amp;type=3#MenuSell" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Menu.uss?fileID=7433441132597879392&amp;guid=f9b72f1decc3d3842bdf95148e0b0aa2&amp;type=3#Menu" />
+    <ui:VisualElement name="MenuStore" class="menu_container">
+        <ui:VisualElement name="MenuHeader" class="menu_header">
+            <ui:Label tabindex="-1" text="Market" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" />
+        </ui:VisualElement>
+        <ui:VisualElement name="MenuContent" class="menu_content">
+            <ui:VisualElement name="Items" class="items_container">
+                <ui:VisualElement name="Row" class="row" style="flex-grow: 1;">
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Row" class="row" style="flex-grow: 1;">
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                    <ui:Instance template="SlotInventory" name="SlotInventory" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="MenuFooter" class="menu_footer" />
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitBtn" class="btn_exit" />
+        <ui:VisualElement name="SubmenuContainer" class="hidden" style="flex-grow: 1; position: absolute; top: 30%; right: 25%; width: 50%; height: 50%;">
+            <ui:Instance template="MenuSell" name="MenuSell" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

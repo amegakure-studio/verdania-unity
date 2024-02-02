@@ -1,0 +1,17 @@
+.item {
+    background-image: url('project://database/Assets/UI/Sprites/03/PNG/Cell01.png?fileID=21300000&guid=994c988b9d649b64b873ced4e7427886&type=3#Cell01');
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    width: 76px;
+    height: 76px;
+}
