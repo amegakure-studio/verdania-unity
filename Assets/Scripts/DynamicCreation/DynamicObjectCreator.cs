@@ -37,7 +37,7 @@ public class DynamicObjectCreator : MonoBehaviour
         
             prefabGO.transform.parent = parentTransform;
             prefabGO.transform.localPosition = oldPos;
-            prefabGO.transform.localRotation = oldRotation;
+            prefabGO.transform.rotation = oldRotation;
 
             Vector3 inverseScale = new Vector3(
                         1.0f / parentTransform.localScale.x,
