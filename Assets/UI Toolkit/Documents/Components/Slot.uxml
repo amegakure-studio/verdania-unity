@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Slot.uss?fileID=7433441132597879392&amp;guid=01818103b333b2243a546b9645a34b4a&amp;type=3#Slot" />
+    <ui:VisualElement name="Slot" class="slot">
+        <ui:VisualElement name="Item" style="flex-grow: 1; background-image: none;" />
+        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" class="item_id" />
+        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quantity" class="quantity_id" />
+    </ui:VisualElement>
+</ui:UXML>

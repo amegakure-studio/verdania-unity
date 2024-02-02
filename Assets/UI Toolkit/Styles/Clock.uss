@@ -39,4 +39,5 @@
     flex-basis: 100%;
     flex-shrink: 0;
     flex-direction: row;
+    background-color: rgba(0, 0, 0, 0);
 }
