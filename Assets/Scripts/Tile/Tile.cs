@@ -16,6 +16,9 @@ namespace Amegakure.Verdania.GridSystem
         private List<Vector2> directions;
         private List<Tile> neighbors = null;
         private bool isMovementTile = true;
+        private float costFromOrigin = 0;
+        private float costToDestination = 0;
+        private int terrainCost = 0;
         #endregion
 
         private void Awake()
@@ -54,6 +57,10 @@ namespace Amegakure.Verdania.GridSystem
         public Tile Parent { get => parent; set => parent = value; }
         public Tile ConnectedTile { get => connectedTile; set => connectedTile = value; }
         public bool IsMovementTile { get => isMovementTile; set => isMovementTile = value; }
+        public float CostFromOrigin { get => costFromOrigin; set => costFromOrigin = value; }
+        public float CostToDestination { get => costToDestination; set => costToDestination = value; }
+        public int TerrainCost { get => terrainCost; set => terrainCost = value; }
+        public float TotalCost { get { return CostFromOrigin + CostToDestination + TerrainCost; } }
 
         public List<Tile> GetNeighbors()
         {
