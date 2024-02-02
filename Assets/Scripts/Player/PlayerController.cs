@@ -5,15 +5,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private const float speed = 10f;
-    private List<Tile> pathVectorList;
-    private int currentPathIndex;
     [SerializeField] PathFinder pathFinder;
-    [SerializeField] Tile origin;
+    [SerializeField] Character character;
 
     void Update()
     {
-        HandleMovement();
+        character.HandleMovement();
 
         string clickType = Input.GetMouseButtonDown(0) ? "Left" :
                     Input.GetMouseButtonDown(1) ? "Right" : null;
@@ -39,49 +36,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleMovement()
-    {
-        if (pathVectorList != null)
-        {
-            Vector3 targetPosition = pathVectorList[currentPathIndex].gameObject.transform.position;
-            if (Vector3.Distance(transform.position, targetPosition) > 1f)
-            {
-                Vector3 moveDir = (targetPosition - transform.position).normalized;
-
-                float distanceBefore = Vector3.Distance(transform.position, targetPosition);
-                transform.position = transform.position + moveDir * speed * Time.deltaTime;
-            }
-            else
-            {
-                currentPathIndex++;
-                if (currentPathIndex >= pathVectorList.Count)
-                {
-                    StopMoving();
-                }
-            }
-        }
-    }
-
-    private void StopMoving() 
-    {
-        pathVectorList = null;
-    }
-
-
     private void SetTargetPosition(Tile targetTile)
     {
-        currentPathIndex = 0;
-        // TODO: Get character actual tile
-        // TODO: Call pathfinder
-        //pathVectorList = Pathfinding.Instance.FindPath(GetPosition(), targetPosition);
-        List<Tile> tiles = new();
-        tiles.AddRange(pathFinder.FindPath(origin, targetTile).tiles);
-        pathVectorList = tiles;
-
-        if (pathVectorList != null && pathVectorList.Count > 1)
+        if(targetTile.coordinate != character.CurrentTile.coordinate)
         {
-            pathVectorList.RemoveAt(0);
+            character.CurrentPathIndex = 0;
+            List<Tile> tiles = new();
+            tiles.AddRange(pathFinder.FindPath(character.CurrentTile, targetTile).tiles);
+            
+            character.PathVectorList = tiles;
         }
     }
-
 }

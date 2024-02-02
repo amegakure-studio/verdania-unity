@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Amegakure.Verdania.GridSystem;
 using Amegakure.Verdania.Pathfinding;
@@ -6,11 +5,6 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    /// <summary>
-    /// Main pathfinding function, marks tiles as being in frontier, while keeping a copy of the frontier
-    /// in "currentFrontier" for later clearing
-    /// </summary>
-    /// <param name="character"></param>
     public Path FindPath(Tile origin, Tile destination)
     {
         List<Tile> openSet = new List<Tile>();
@@ -19,7 +13,7 @@ public class PathFinder : MonoBehaviour
         openSet.Add(origin);
         origin.CostFromOrigin = 0;
 
-        float tileDistance = origin.GetComponent<MeshFilter>().sharedMesh.bounds.extents.z * 2;
+        float tileDistance = origin.GetComponent<MeshFilter>().sharedMesh.bounds.extents.z * 4;
         
         while (openSet.Count > 0)
         {
