@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    private const float speed = 3f;
+    [Header("Movement variables")]
     [SerializeField] Tile initTile;
-
+    private const float speed = 3f;
     private List<Tile> pathVectorList;
     private int currentPathIndex;
     private Tile currentTile;
+
+    [Header("Climb variables")]
+    [SerializeField] GameObject stepRayUpper;
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] float stepHeight = 0.3f;
+    [SerializeField] float stepSmooth = 2f;
 
     public List<Tile> PathVectorList
     {
@@ -39,7 +45,8 @@ public class Character : MonoBehaviour
         {
             Tile lastTile = PathVectorList[CurrentPathIndex];
             Vector3 targetPosition = lastTile.gameObject.transform.position;
-            
+            targetPosition.y = transform.position.y;
+
             if (Vector3.Distance(transform.position, targetPosition) > 0.3f)
             {
                 MoveAndRotate(targetPosition);
@@ -67,6 +74,44 @@ public class Character : MonoBehaviour
 
         if (vectorRotation != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(vectorRotation, Vector3.up);
+
+        Climb();
+    }
+
+    private void Climb()
+    {
+        Debug.Log("Climb!!!!!!");
+        RaycastHit hitLower;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
+        {
+            RaycastHit hitUpper;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
+            {
+                transform.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+        RaycastHit hitLower45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.1f))
+        {
+
+            RaycastHit hitUpper45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.2f))
+            {
+                transform.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinus45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinus45, 0.1f))
+        {
+
+            RaycastHit hitUpperMinus45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.2f))
+            {
+                transform.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+            }
+        }
     }
 
     private void StopMoving()
