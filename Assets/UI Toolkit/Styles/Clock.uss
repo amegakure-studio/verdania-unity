@@ -4,7 +4,20 @@
     flex-basis: 100%;
     background-image: url('project://database/Assets/UI/Sprites/03/PNG/Cell01.png?fileID=21300000&guid=994c988b9d649b64b873ced4e7427886&type=3#Cell01');
     background-color: rgba(0, 0, 0, 0);
-    -unity-background-image-tint-color: rgba(255, 255, 255, 0.78);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
 }
 
 .container_time {
@@ -13,10 +26,13 @@
     align-items: center;
     justify-content: center;
     background-image: url('project://database/Assets/UI/Sprites/03/PNG/Cell01.png?fileID=21300000&guid=994c988b9d649b64b873ced4e7427886&type=3#Cell01');
-    -unity-background-image-tint-color: rgba(255, 255, 255, 0.78);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    font-size: 18px;
+    font-size: 26px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 50px;
 }
 
 .clock {

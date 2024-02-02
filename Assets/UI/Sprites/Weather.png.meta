@@ -140,9 +140,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 611
-        width: 195
-        height: 164
+        y: 633
+        width: 161
+        height: 142
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,9 +161,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 201
-        y: 611
-        width: 195
-        height: 164
+        y: 626
+        width: 197
+        height: 149
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: Weather_2
       rect:
         serializedVersion: 2
-        x: 452
-        y: 611
-        width: 195
-        height: 164
+        x: 455
+        y: 629
+        width: 192
+        height: 146
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,9 +203,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 420
-        width: 195
-        height: 164
+        y: 437
+        width: 189
+        height: 147
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,9 +224,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 230
-        y: 390
-        width: 195
-        height: 164
+        y: 385
+        width: 196
+        height: 161
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,10 +244,10 @@ TextureImporter:
       name: Weather_5
       rect:
         serializedVersion: 2
-        x: 464
-        y: 420
-        width: 195
-        height: 164
+        x: 494
+        y: 435
+        width: 161
+        height: 141
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,9 +266,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 178
+        y: 175
         width: 200
-        height: 170
+        height: 173
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,10 +307,10 @@ TextureImporter:
       name: Weather_8
       rect:
         serializedVersion: 2
-        x: 457
-        y: 203
-        width: 200
-        height: 170
+        x: 463
+        y: 173
+        width: 195
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,9 +329,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 195
-        height: 164
+        y: 45
+        width: 172
+        height: 116
       alignment: 9
       pivot: {x: 0.50000006, y: 0.57387257}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -351,8 +351,8 @@ TextureImporter:
         serializedVersion: 2
         x: 219
         y: 2
-        width: 200
-        height: 170
+        width: 178
+        height: 175
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
