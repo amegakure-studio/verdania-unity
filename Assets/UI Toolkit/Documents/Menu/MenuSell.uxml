@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/MenuSell.uss?fileID=7433441132597879392&amp;guid=25d1686ce9527924ead05457e3631ffe&amp;type=3#MenuSell" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Menu.uss?fileID=7433441132597879392&amp;guid=f9b72f1decc3d3842bdf95148e0b0aa2&amp;type=3#Menu" />
+    <ui:VisualElement name="MenuSell" class="menu_container" style="flex-grow: 1;">
+        <ui:VisualElement name="Header" class="menu_header">
+            <ui:Label tabindex="-1" text="Sell &lt;ITEM&gt; for &lt;MONEY&gt; ?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="font-size: 14px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Content" class="menu_content">
+            <ui:SliderInt picking-mode="Ignore" label="SliderInt" value="42" high-value="100" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Footer" class="menu_footer">
+            <ui:Button text="Confirm" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BtnConfirm" class="btn_large" style="background-color: rgba(255, 255, 255, 0);" />
+            <ui:Button text="Cancel" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BtnCancel" class="btn_large" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

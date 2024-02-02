@@ -1,0 +1,99 @@
+.menu_container {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-image: url('project://database/Assets/UI/Sprites/03/JPG/MiniPanel03.jpg?fileID=21300000&guid=b191d2220f9bc6644b50367fa92b65cf&type=3#MiniPanel03');
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
+.menu_header {
+    flex-grow: 0;
+    padding-top: 7%;
+    padding-right: 2%;
+    padding-bottom: 5%;
+    padding-left: 2%;
+    flex-shrink: 0;
+    flex-basis: 30%;
+    font-size: 36px;
+}
+
+.menu_content {
+    flex-grow: 0;
+    flex-basis: 50%;
+    flex-shrink: 0;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu_footer {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.row {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.items_container {
+    flex-grow: 1;
+    align-items: center;
+    width: 80%;
+}
+
+.btn_exit {
+    position: absolute;
+    right: 1%;
+    top: 3%;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/UI/Sprites/ControllerIcons/Textures/Filled/Sheets/ps4.png?fileID=21300052&guid=10045ad39fef69944b33bedc39310592&type=3#Cross');
+    -unity-background-scale-mode: scale-to-fit;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 5%;
+    margin-left: 0;
+    width: 36px;
+    height: 36px;
+}
+
+.btn_large {
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    background-color: rgba(188, 188, 188, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-image: url('project://database/Assets/UI/Sprites/01/%D0%A1ommonElement/BtnDefault.png?fileID=21300000&guid=c8e174f398c87144a8f7c3287d306fd1&type=3#BtnDefault');
+    font-size: 12px;
+    width: 20%;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.row #SlotInventory {
+    width: 50%;
+}

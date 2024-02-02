@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Menu.uss?fileID=7433441132597879392&amp;guid=f9b72f1decc3d3842bdf95148e0b0aa2&amp;type=3#Menu" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/SlotInventory.uss?fileID=7433441132597879392&amp;guid=d271c0762824a96439d84d293ccd90cc&amp;type=3#SlotInventory" />
+    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Item" class="item">
+        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quantity" style="position: absolute; bottom: 0; right: 0; -unity-font-style: bold; color: rgb(255, 255, 255); font-size: 20px;" />
+    </ui:Button>
+</ui:UXML>

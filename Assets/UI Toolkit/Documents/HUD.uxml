@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Clock" src="project://database/Assets/UI%20Toolkit/Documents/Components/Clock.uxml?fileID=9197481963319205126&amp;guid=5749f1c648c821c4d83662ef79a67aa5&amp;type=3#Clock" />
+    <ui:Template name="Money" src="project://database/Assets/UI%20Toolkit/Documents/Components/Money.uxml?fileID=9197481963319205126&amp;guid=639615f7932d0f8479bcb1d47e9bed52&amp;type=3#Money" />
+    <ui:Template name="Inventory" src="project://database/Assets/UI%20Toolkit/Documents/Components/Inventory.uxml?fileID=9197481963319205126&amp;guid=72a6cae29f13e7544a06dd6043c74f05&amp;type=3#Inventory" />
+    <ui:Template name="MenuStore" src="project://database/Assets/UI%20Toolkit/Documents/Menu/MenuStore.uxml?fileID=9197481963319205126&amp;guid=f3159151218034242ba5c1d03d80e2f5&amp;type=3#MenuStore" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/HUD.uss?fileID=7433441132597879392&amp;guid=22a08b5309b49694ca3861645230f73a&amp;type=3#HUD" />
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:VisualElement name="Header" class="header_hud">
+            <ui:Instance template="Clock" name="Clock" class="clock" />
+            <ui:Instance template="Money" name="Money" class="money" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Middle" class="middle_hud" />
+        <ui:VisualElement name="Footer" class="footer_hud">
+            <ui:Instance template="Inventory" name="Inventory" />
+        </ui:VisualElement>
+        <ui:VisualElement name="MenuArea" style="flex-grow: 1;">
+            <ui:Instance template="MenuStore" name="MenuStore" style="width: 100%; height: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
