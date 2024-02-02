@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Clock.uss?fileID=7433441132597879392&amp;guid=f785a171acbbcc146baf633b35ee05bd&amp;type=3#Clock" />
+    <ui:VisualElement name="Clock" class="clock">
+        <ui:VisualElement name="IconContainer" class="container_icon">
+            <ui:VisualElement name="Icon" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TimeContainer" class="container_time">
+            <ui:Label tabindex="-1" text="0:00" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Time" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

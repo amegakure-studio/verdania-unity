@@ -1,0 +1,20 @@
+.header_hud {
+    flex-grow: 0;
+    flex-basis: 30%;
+}
+
+.middle_hud {
+    flex-grow: 0;
+    flex-basis: 50%;
+}
+
+.footer_hud {
+    flex-grow: 0;
+    flex-basis: 20%;
+}
+
+.clock {
+    flex-grow: 0;
+    align-self: flex-end;
+    flex-basis: 30%;
+}
