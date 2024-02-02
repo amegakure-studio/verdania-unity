@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/Money.uss?fileID=7433441132597879392&amp;guid=521964c3b7e598e4a9780f651ecaaa0d&amp;type=3#Money" />
+    <ui:VisualElement name="Money" style="flex-grow: 1; width: 100%; height: 100%;">
+        <ui:VisualElement name="Label" class="label">
+            <ui:Label tabindex="-1" text="$0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Amount" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
