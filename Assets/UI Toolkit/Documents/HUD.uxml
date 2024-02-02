@@ -13,7 +13,7 @@
         <ui:VisualElement name="Footer" class="footer_hud">
             <ui:Instance template="Inventory" name="Inventory" />
         </ui:VisualElement>
-        <ui:VisualElement name="MenuArea" style="flex-grow: 1; visibility: hidden; display: none;">
+        <ui:VisualElement name="MenuArea" style="flex-grow: 1;">
             <ui:Instance template="MenuStore" name="MenuStore" style="width: 100%; height: 100%;" />
         </ui:VisualElement>
     </ui:VisualElement>
