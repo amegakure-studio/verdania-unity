@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1518697762825097885}
   - component: {fileID: 7081970504998721556}
   m_Layer: 0
-  m_Name: Bridge_stone
+  m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
