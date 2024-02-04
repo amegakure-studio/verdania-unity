@@ -464,6 +464,50 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 538984065}
+--- !u!1 &131405609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131405611}
+  - component: {fileID: 131405610}
+  m_Layer: 0
+  m_Name: Finders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &131405610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131405609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8598bdb0bd19f174da9c2c2990a1bde5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &131405611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131405609}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 222.57082, y: 84.70812, z: 170.86028}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &271205724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8601828663153087950, guid: 7de013d7593d7a242a491a5a2b0353b9,
@@ -1408,7 +1452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222432757}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3023683, y: 0.09371479, z: -0.029887475, w: 0.9481022}
+  m_LocalRotation: {x: 0.30236834, y: 0.09371485, z: -0.029887496, w: 0.9481022}
   m_LocalPosition: {x: -55.648148, y: 16.568794, z: 14.56604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1611,12 +1655,12 @@ PrefabInstance:
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0937148
+      value: 0.09371483
       objectReference: {fileID: 0}
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.029887475
+      value: -0.029887488
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2621,3 +2665,4 @@ SceneRoots:
   - {fileID: 784303984}
   - {fileID: 294051579}
   - {fileID: 1493012773}
+  - {fileID: 131405611}
