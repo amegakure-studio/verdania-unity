@@ -80,7 +80,6 @@ public class Character : MonoBehaviour
 
     private void Climb()
     {
-        Debug.Log("Climb!!!!!!");
         RaycastHit hitLower;
         if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
         {

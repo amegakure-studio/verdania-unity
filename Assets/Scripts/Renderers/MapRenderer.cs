@@ -14,45 +14,44 @@ public class MapRenderer : MonoBehaviour
     private WorldManager m_WorldManager;
     private Session m_Session;
     private MapFinder m_Finder;
-    private Dictionary<Vector2, TileRenderer> m_TileRenderers;
+    private Dictionary<Vector2Int, TileRenderer> m_TileRenderers;
 
-    void Awake()
+    private void OnEnable()
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
         m_WorldManager.OnEntityFeched += Create;
+    }
+
+    void Awake()
+    {
+        m_TileRenderers = new Dictionary<Vector2Int, TileRenderer>();
+        GameObject.FindObjectsOfType<TileRenderer>()
+            .ToList()
+            .ForEach(tileRenderer => m_TileRenderers.Add(tileRenderer.coordinate, tileRenderer));
 
         m_Session = GameObject.FindObjectOfType<Session>();
 
         m_Finder = GameObject.FindObjectOfType<MapFinder>();
-
-        m_TileRenderers = new Dictionary<Vector2, TileRenderer>();
     }
 
-    private void Start()
-    {
-        GameObject.FindObjectsOfType<TileRenderer>()
-            .ToList()
-            .ForEach(tileRenderer => m_TileRenderers.Add(tileRenderer.coordinate, tileRenderer));
-    }
-
-    void OnDestroy()
+    void OnDisable()
     {
         m_WorldManager.OnEntityFeched -= Create;
     }
 
-
     private void Create(WorldManager worldManager)
     {
         List<Tile> tiles = m_Finder.GetTilesByMapID(m_Session.MapId, worldManager.Entities());
-
+        
         foreach (Tile tile in tiles) 
         { 
             if (tile.tileType == TileType.Bridge || tile.tileType == TileType.Building)
             {
-                Vector2 tileCoordinate = new(tile.x, tile.y);
-
+                Vector2Int tileCoordinate = new((int)tile.x, (int)tile.y);
+                Debug.Log(tileCoordinate);
+                 
                 if (m_TileRenderers.ContainsKey(tileCoordinate))
-                {
+                {       
                     TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
                     GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + tile.tileType.ToString());
 
@@ -63,6 +62,4 @@ public class MapRenderer : MonoBehaviour
             }              
         }
     }
-
-
 }

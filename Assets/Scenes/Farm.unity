@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.42177907, g: 1.1766992, b: 1.3622415, a: 1}
+  m_IndirectSpecularColor: {r: 0.4216299, g: 1.1765113, b: 1.3623252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerId:
     hex: 0x0000000000000000000000000000000000000000000000000000000000000000
-  m_MapId: 0
+  m_MapId: 1
   m_FarmId: 0
 --- !u!1 &389622469
 GameObject:
@@ -1520,12 +1520,12 @@ PrefabInstance:
     - target: {fileID: 1358959843617531427, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.094385676
+      value: 0.09438564
       objectReference: {fileID: 0}
     - target: {fileID: 1358959843617531427, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.027696159
+      value: -0.027696151
       objectReference: {fileID: 0}
     - target: {fileID: 1928413323766480964, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
@@ -1655,12 +1655,12 @@ PrefabInstance:
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.09371483
+      value: 0.09371482
       objectReference: {fileID: 0}
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.029887488
+      value: -0.029887479
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1703,6 +1703,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FarmMap
       objectReference: {fileID: 0}
+    - target: {fileID: 3932656830231750169, guid: 7534304bb717f9043bca0fe03e26a58a,
+        type: 3}
+      propertyPath: m_WorldManager
+      value: 
+      objectReference: {fileID: 1283552599}
     - target: {fileID: 5863837853489527353, guid: 7534304bb717f9043bca0fe03e26a58a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1758,6 +1763,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7534304bb717f9043bca0fe03e26a58a, type: 3}
+--- !u!114 &1283552599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+    type: 3}
+  m_PrefabInstance: {fileID: 1524972621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bbcaeafdf5e41c6a2f48ff65820b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1422723183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,8 +2673,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 23382551}
-  - {fileID: 1524972621}
   - {fileID: 341245914}
+  - {fileID: 1524972621}
   - {fileID: 1422723185}
   - {fileID: 553234151}
   - {fileID: 1264524583}
