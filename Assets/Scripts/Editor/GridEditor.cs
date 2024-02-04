@@ -103,10 +103,10 @@ namespace Amegakure.Verdania.GridSystem
             if (tiles.Length != 2)
                 return;
 
-            if (tiles[0].GetComponent<Tile>() && tiles[1].GetComponent<Tile>())
+            if (tiles[0].GetComponent<TileRenderer>() && tiles[1].GetComponent<TileRenderer>())
             {
-                tiles[0].GetComponent<Tile>().ConnectedTile = tiles[1].GetComponent<Tile>();
-                tiles[1].GetComponent<Tile>().ConnectedTile = tiles[0].GetComponent<Tile>();
+                tiles[0].GetComponent<TileRenderer>().ConnectedTile = tiles[1].GetComponent<TileRenderer>();
+                tiles[1].GetComponent<TileRenderer>().ConnectedTile = tiles[0].GetComponent<TileRenderer>();
             }
         }
     }

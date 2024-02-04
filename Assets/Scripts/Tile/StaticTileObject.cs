@@ -13,7 +13,7 @@ namespace Amegakure.Verdania.GridSystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            collision.gameObject.TryGetComponent<Tile>(out Tile tile);
+            collision.gameObject.TryGetComponent<TileRenderer>(out TileRenderer tile);
             if (tile != null)
             {
                 tile.OccupyingObject = gameObject;

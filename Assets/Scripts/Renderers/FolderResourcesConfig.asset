@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199f2c32947b9f5448f3a40973b795b3, type: 3}
   m_Name: FolderResourcesConfig
   m_EditorClassIdentifier: 
-  cropsFolder: Crops
-  charactersFolder: Characters
-  objectsFolder: Objects
-  npcFolder: NPC
+  cropsFolder: Crops/
+  charactersFolder: Characters/
+  objectsFolder: Objects/
+  npcFolder: NPC/

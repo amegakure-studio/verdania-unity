@@ -57,7 +57,7 @@ namespace Amegakure.Verdania.GridSystem
             GameObject newTile = Instantiate(t.gameObject, pos, Quaternion.identity, transform);
             newTile.name = "Tile " + id;
         
-            newTile.GetComponent<Tile>().Coordinate = id;
+            newTile.GetComponent<TileRenderer>().Coordinate = id;
         }
     }
 }

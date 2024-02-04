@@ -1,7 +1,7 @@
 
 namespace Amegakure.Verdania.GridSystem
 {
-    public enum TileType
+    public enum TileDirectionType
     {
         ORTHOGONAL,
         HEXAGONAL

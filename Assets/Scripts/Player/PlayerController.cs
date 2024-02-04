@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         int layerMask = 1 << LayerMask.NameToLayer("Tile");
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
-            Tile tile = hit.collider.GetComponent<Tile>();
+            TileRenderer tile = hit.collider.GetComponent<TileRenderer>();
             if (tile != null)
             {
                 Debug.Log(clickType + ": " + tile.coordinate.ToString());
@@ -36,12 +36,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetTargetPosition(Tile targetTile)
+    private void SetTargetPosition(TileRenderer targetTile)
     {
         if(targetTile.coordinate != character.CurrentTile.coordinate)
         {
             character.CurrentPathIndex = 0;
-            List<Tile> tiles = new();
+            List<TileRenderer> tiles = new();
             tiles.AddRange(pathFinder.FindPath(character.CurrentTile, targetTile).tiles);
             
             character.PathVectorList = tiles;

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Movement variables")]
-    [SerializeField] Tile initTile;
+    [SerializeField] TileRenderer initTile;
     private const float speed = 3f;
-    private List<Tile> pathVectorList;
+    private List<TileRenderer> pathVectorList;
     private int currentPathIndex;
-    private Tile currentTile;
+    private TileRenderer currentTile;
 
     [Header("Climb variables")]
     [SerializeField] GameObject stepRayUpper;
@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
     [SerializeField] float stepHeight = 0.3f;
     [SerializeField] float stepSmooth = 2f;
 
-    public List<Tile> PathVectorList
+    public List<TileRenderer> PathVectorList
     {
         get => pathVectorList;
         set
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
         }
     }
     public int CurrentPathIndex { get => currentPathIndex; set => currentPathIndex = value; }
-    public Tile CurrentTile { get => currentTile; set => currentTile = value; }
+    public TileRenderer CurrentTile { get => currentTile; set => currentTile = value; }
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
     {
         if (PathVectorList != null)
         {
-            Tile lastTile = PathVectorList[CurrentPathIndex];
+            TileRenderer lastTile = PathVectorList[CurrentPathIndex];
             Vector3 targetPosition = lastTile.gameObject.transform.position;
             targetPosition.y = transform.position.y;
 
@@ -116,7 +116,7 @@ public class Character : MonoBehaviour
 
     private void StopMoving()
     {
-        Tile lastTile = PathVectorList[PathVectorList.Count - 1];
+        TileRenderer lastTile = PathVectorList[PathVectorList.Count - 1];
         this.currentTile = lastTile;
         PathVectorList = null;
     }

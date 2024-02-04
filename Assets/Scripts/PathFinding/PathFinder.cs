@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    public Path FindPath(Tile origin, Tile destination)
+    public Path FindPath(TileRenderer origin, TileRenderer destination)
     {
-        List<Tile> openSet = new List<Tile>();
-        List<Tile> closedSet = new List<Tile>();
+        List<TileRenderer> openSet = new List<TileRenderer>();
+        List<TileRenderer> closedSet = new List<TileRenderer>();
         
         openSet.Add(origin);
         origin.CostFromOrigin = 0;
@@ -18,7 +18,7 @@ public class PathFinder : MonoBehaviour
         while (openSet.Count > 0)
         {
             openSet.Sort((x, y) => x.TotalCost.CompareTo(y.TotalCost));
-            Tile currentTile = openSet[0];
+            TileRenderer currentTile = openSet[0];
 
             openSet.Remove(currentTile);
             closedSet.Add(currentTile);
@@ -29,7 +29,7 @@ public class PathFinder : MonoBehaviour
                 return PathBetween(destination, origin);
             }
 
-            foreach (Tile neighbor in currentTile.GetNeighbors())
+            foreach (TileRenderer neighbor in currentTile.GetNeighbors())
             {
                 if(closedSet.Contains(neighbor))
                     continue;
@@ -50,7 +50,7 @@ public class PathFinder : MonoBehaviour
         return null;
     }
 
-    public Path PathBetween(Tile dest, Tile source)
+    public Path PathBetween(TileRenderer dest, TileRenderer source)
     {
         Path path = MakePath(dest, source);
         return path;
@@ -62,10 +62,10 @@ public class PathFinder : MonoBehaviour
     /// <param name="destination"></param>
     /// <param name="origin"></param>
     /// <returns></returns>
-    private Path MakePath(Tile destination, Tile origin)
+    private Path MakePath(TileRenderer destination, TileRenderer origin)
     {
-        List<Tile> tiles = new List<Tile>();
-        Tile current = destination;
+        List<TileRenderer> tiles = new List<TileRenderer>();
+        TileRenderer current = destination;
 
         while (current != origin)
         {

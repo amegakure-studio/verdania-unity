@@ -1,20 +1,21 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Amegakure.Verdania.GridSystem
 {
-    public class Tile : MonoBehaviour
+    public class TileRenderer : MonoBehaviour
     {
-        [SerializeField] TileType tileType = TileType.ORTHOGONAL;
+        [SerializeField] TileDirectionType tileType = TileDirectionType.ORTHOGONAL;
 
         #region member fields
-        private Tile parent;
-        private Tile connectedTile;
+        private TileRenderer parent;
+        private TileRenderer connectedTile;
         private GameObject occupyingObject;
         private float cost;
         public Vector2Int coordinate;
         private List<Vector2> directions;
-        private List<Tile> neighbors = null;
+        private List<TileRenderer> neighbors = null;
         private bool isMovementTile = true;
         private float costFromOrigin = 0;
         private float costToDestination = 0;
@@ -25,7 +26,7 @@ namespace Amegakure.Verdania.GridSystem
         {
             switch (tileType) 
             {
-                case TileType.ORTHOGONAL: 
+                case TileDirectionType.ORTHOGONAL: 
                     directions = new()
                     {
                         new Vector2(1, 0),
@@ -33,7 +34,7 @@ namespace Amegakure.Verdania.GridSystem
                         new Vector2(-1, 0),
                         new Vector2(0, -1),
                     }; break;
-                case TileType.HEXAGONAL:
+                case TileDirectionType.HEXAGONAL:
                     directions = new()
                     {
                         new Vector2(1, 0),
@@ -48,35 +49,78 @@ namespace Amegakure.Verdania.GridSystem
             }
         }
 
-        public GameObject OccupyingObject { get => occupyingObject; set => occupyingObject = value; }
+        public GameObject OccupyingObject 
+        { get => occupyingObject;
+            set 
+            { 
+                if (occupyingObject != null)
+                {
+                    foreach (Transform child in transform)
+                    { Destroy(child.gameObject); }
+                }
+
+                InstantiateObject(value);
+                occupyingObject = value; 
+            } 
+        }
+
+        private void InstantiateObject(GameObject prefab)
+        {
+            if (prefab != null)
+            {
+                GameObject prefabGO = Instantiate(prefab);
+
+                Vector3 oldPos = prefabGO.transform.position;
+                Vector3 oldScale = prefabGO.transform.localScale;
+                Quaternion oldRotation = prefabGO.transform.rotation;
+
+                prefabGO.transform.parent = transform;
+                prefabGO.transform.localPosition = oldPos;
+                prefabGO.transform.rotation = oldRotation;
+
+                Vector3 inverseScale = new (
+                            1.0f / transform.localScale.x,
+                            1.0f / transform.localScale.y,
+                            1.0f / transform.localScale.z
+                            );
+
+
+                prefabGO.transform.localScale = new Vector3(
+                            oldScale.x * inverseScale.x,
+                            oldScale.y * inverseScale.y,
+                            oldScale.z * inverseScale.z
+                        );
+            }
+        }
+
         public Vector2Int Coordinate { get => coordinate; set => coordinate = value; }
         public bool Occupied() { return occupyingObject != null; }
         public bool InFrontier { get; set; } = false;
         public bool CanBeReached { get { return !Occupied() && InFrontier; } }
         public float Cost { get => cost; set => cost = value; }
-        public Tile Parent { get => parent; set => parent = value; }
-        public Tile ConnectedTile { get => connectedTile; set => connectedTile = value; }
+        public TileRenderer Parent { get => parent; set => parent = value; }
+        public TileRenderer ConnectedTile { get => connectedTile; set => connectedTile = value; }
         public bool IsMovementTile { get => isMovementTile; set => isMovementTile = value; }
         public float CostFromOrigin { get => costFromOrigin; set => costFromOrigin = value; }
         public float CostToDestination { get => costToDestination; set => costToDestination = value; }
         public int TerrainCost { get => terrainCost; set => terrainCost = value; }
         public float TotalCost { get { return CostFromOrigin + CostToDestination + TerrainCost; } }
 
-        public List<Tile> GetNeighbors()
+        public List<TileRenderer> GetNeighbors()
         {
             this.neighbors ??= this.CalculateNeighbors(directions);
             return neighbors;
         }
 
 
-        public List<Tile> GetNeighbors(List<Vector2> directions)
+        public List<TileRenderer> GetNeighbors(List<Vector2> directions)
         {
             return this.CalculateNeighbors(directions);
         }
 
-        public List<Tile> CalculateNeighbors(List<Vector2> directions)
+        public List<TileRenderer> CalculateNeighbors(List<Vector2> directions)
         {
-            List<Tile> neighbors = new();
+            List<TileRenderer> neighbors = new();
 
             List<Vector2> neighborsDir = new();
 
@@ -87,9 +131,9 @@ namespace Amegakure.Verdania.GridSystem
 
             GameObject parent = transform.parent.gameObject;
 
-            Tile[] tiles = parent.GetComponentsInChildren<Tile>();
+            TileRenderer[] tiles = parent.GetComponentsInChildren<TileRenderer>();
 
-            foreach (Tile tile in tiles)
+            foreach (TileRenderer tile in tiles)
             {
                 if (neighborsDir.Contains(tile.coordinate))
                     neighbors.Add(tile);
