@@ -1360,7 +1360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222432757}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3023683, y: 0.09371487, z: -0.029887501, w: 0.9481022}
+  m_LocalRotation: {x: 0.3023683, y: 0.09371478, z: -0.029887475, w: 0.9481022}
   m_LocalPosition: {x: -55.648148, y: 16.568794, z: 14.56604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1563,12 +1563,12 @@ PrefabInstance:
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.093714856
+      value: 0.093714796
       objectReference: {fileID: 0}
     - target: {fileID: 8856611573623244596, guid: 4f9faa8a9e4d38b4ea2a30508b3f8f1a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.029887492
+      value: -0.029887471
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1771,6 +1771,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d6a5fa48aab79f0084b213f6fc768c5,
+        type: 2}
+    - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
+      propertyPath: rpcUrl
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
+      propertyPath: toriiUrl
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
+      propertyPath: dojoConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d6a5fa48aab79f0084b213f6fc768c5,
+        type: 2}
+    - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
       propertyPath: worldAddress
       value: 0x2b1cf8336cc4eca5a07c4fff03bf999dc7a75505bed5872b9e3810f4ca63bc5
       objectReference: {fileID: 0}
@@ -1823,6 +1845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477060482053654553, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
+      propertyPath: limit
+      value: 200000
       objectReference: {fileID: 0}
     - target: {fileID: 4900589733936057544, guid: d2e25933f4d69473a8994ee7470b2610,
         type: 3}

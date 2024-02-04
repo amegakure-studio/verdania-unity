@@ -10,24 +10,37 @@ namespace Dojo
 {
     public class WorldManager : MonoBehaviour
     {
-        [Header("RPC")]
-        public string toriiUrl = "http://localhost:8080";
-        public string rpcUrl = "http://localhost:5050";
-        public string relayUrl = "/ip4/127.0.0.1/tcp/9090";
-        public string relayWebrtcUrl;
-        [Header("World")]
-        public string worldAddress;
-        public SynchronizationMaster synchronizationMaster;
+        private string toriiUrl;
+        private string rpcUrl;
+        private string relayUrl;
+        private string relayWebrtcUrl;
+        private string worldAddress;
+        private SynchronizationMaster synchronizationMaster;
         public ToriiClient toriiClient;
         public ToriiWasmClient wasmClient;
+        [SerializeField] WorldManagerData dojoConfig;
+
+        public string ToriiUrl { get => toriiUrl; set => toriiUrl = value; }
+        public string RpcUrl { get => rpcUrl; set => rpcUrl = value; }
+        public string RelayUrl { get => relayUrl; set => relayUrl = value; }
+        public string RelayWebrtcUrl { get => relayWebrtcUrl; set => relayWebrtcUrl = value; }
+        public string WorldAddress { get => worldAddress; set => worldAddress = value; }
+        public SynchronizationMaster SynchronizationMaster { get => synchronizationMaster; set => synchronizationMaster = value; }
 
         async void Awake()
         {
+            ToriiUrl = dojoConfig.toriiUrl;
+            RpcUrl = dojoConfig.rpcUrl;
+            RelayUrl = dojoConfig.relayUrl;
+            RelayWebrtcUrl = dojoConfig.relayWebrtcUrl;
+            WorldAddress = dojoConfig.worldAddress;
+            SynchronizationMaster = GetComponent<SynchronizationMaster>();
+
 #if UNITY_WEBGL && !UNITY_EDITOR
             wasmClient = new ToriiWasmClient(toriiUrl, rpcUrl, relayWebrtcUrl, worldAddress);
             await wasmClient.CreateClient();
 #else
-            toriiClient = new ToriiClient(toriiUrl, rpcUrl, relayUrl, worldAddress);
+            toriiClient = new ToriiClient(ToriiUrl, RpcUrl, RelayUrl, WorldAddress);
 #endif
 
 
@@ -37,11 +50,11 @@ namespace Dojo
 #if UNITY_WEBGL && !UNITY_EDITOR
             await synchronizationMaster.SynchronizeEntities();
 #else
-            synchronizationMaster.SynchronizeEntities();
+            SynchronizationMaster.SynchronizeEntities();
 #endif
 
             // listen for entity updates
-            synchronizationMaster.RegisterEntityCallbacks();
+            SynchronizationMaster.RegisterEntityCallbacks();
         }
 
         // Update is called once per frame
@@ -136,12 +149,12 @@ namespace Dojo
 #endif
         }
 
-        public async Task<byte[]> Publish(string topic, byte[] data)
+        public async Task<byte[]> Publish(string topic, byte[] dojoConfig)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            return await wasmClient.PublishMessage(topic, data);
+            return await wasmClient.PublishMessage(topic, dojoConfig);
 #else
-            return toriiClient.PublishMessage(topic, data).ToArray();
+            return toriiClient.PublishMessage(topic, dojoConfig).ToArray();
 #endif
         }
     }

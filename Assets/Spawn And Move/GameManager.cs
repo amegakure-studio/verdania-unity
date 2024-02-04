@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        var provider = new JsonRpcClient(worldManager.rpcUrl);
+        var provider = new JsonRpcClient(worldManager.RpcUrl);
         var signer = new SigningKey(masterPrivateKey);
         var account = new Account(provider, signer, new FieldElement(masterAddress));
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        worldManager.synchronizationMaster.OnEntitySpawned.AddListener(InitEntity);
+        worldManager.SynchronizationMaster.OnEntitySpawned.AddListener(InitEntity);
         foreach (var entity in worldManager.Entities())
         {
             InitEntity(entity);
