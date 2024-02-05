@@ -17,6 +17,15 @@ public class PlayerController : MonoBehaviour
 
         if (clickType != null)
             HandleClick(clickType);
+
+        if (Input.GetKeyDown(KeyCode.K))
+            EventManager.Instance.Publish(GameEvent.CHARACTER_HOE, new() { { "Character", character.gameObject } });
+
+        else if (Input.GetKeyDown(KeyCode.L))
+            EventManager.Instance.Publish(GameEvent.CHARACTER_PLANT, new() { { "Character", character.gameObject } });
+
+        else if (Input.GetKeyDown(KeyCode.J))
+            EventManager.Instance.Publish(GameEvent.CHARACTER_WATER, new() { { "Character", character.gameObject } });
     }
 
     private void HandleClick(string clickType)
