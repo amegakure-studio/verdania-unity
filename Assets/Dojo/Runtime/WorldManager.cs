@@ -19,6 +19,7 @@ namespace Dojo
         public ToriiClient toriiClient;
         public ToriiWasmClient wasmClient;
         [SerializeField] WorldManagerData dojoConfig;
+        public event Action<WorldManager> OnEntityFeched;
 
         public string ToriiUrl { get => toriiUrl; set => toriiUrl = value; }
         public string RpcUrl { get => rpcUrl; set => rpcUrl = value; }
@@ -52,6 +53,7 @@ namespace Dojo
 #else
             SynchronizationMaster.SynchronizeEntities();
 #endif
+            OnEntityFeched?.Invoke(this);
 
             // listen for entity updates
             SynchronizationMaster.RegisterEntityCallbacks();
