@@ -51,6 +51,7 @@ public class Character : MonoBehaviour
             {
                 MoveAndRotate(targetPosition);
                 this.currentTile = lastTile;
+                EventManager.Instance.Publish(GameEvent.CHARACTER_MOVE_START, new() { { "Character", gameObject } });
             }
             else
             {
@@ -58,6 +59,7 @@ public class Character : MonoBehaviour
                 if (CurrentPathIndex >= PathVectorList.Count)
                 {
                     StopMoving();
+                    EventManager.Instance.Publish(GameEvent.CHARACTER_MOVE_END, new() { { "Character", gameObject } });
                 }
             }
         }
