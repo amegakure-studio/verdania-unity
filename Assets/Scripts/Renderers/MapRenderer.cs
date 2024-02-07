@@ -10,8 +10,8 @@ using UnityEngine;
 public class MapRenderer : MonoBehaviour
 {  
     [SerializeField] FolderResourcesConfig folderResourcesConfig;
-
     private WorldManager m_WorldManager;
+
     private Session m_Session;
     private MapFinder m_Finder;
     private Dictionary<Vector2Int, TileRenderer> m_TileRenderers;
@@ -19,7 +19,7 @@ public class MapRenderer : MonoBehaviour
     private void OnEnable()
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
-        m_WorldManager.OnEntityFeched += Create;
+        m_WorldManager.OnEntityFetched += Create;
     }
 
     void Awake()
@@ -36,13 +36,13 @@ public class MapRenderer : MonoBehaviour
 
     void OnDisable()
     {
-        m_WorldManager.OnEntityFeched -= Create;
+        m_WorldManager.OnEntityFetched -= Create;
     }
 
     private void Create(WorldManager worldManager)
     {
         List<Tile> tiles = m_Finder.GetTilesByMapID(m_Session.MapId, worldManager.Entities());
-        
+    
         foreach (Tile tile in tiles) 
         { 
             if (tile.tileType == TileType.Bridge || tile.tileType == TileType.Building)
