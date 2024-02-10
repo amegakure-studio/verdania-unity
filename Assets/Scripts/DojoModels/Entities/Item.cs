@@ -16,16 +16,16 @@ public class Item : ModelInstance
 
 public enum Tool
 {
-    Hoe = 2,
-    Pickaxe,
-    WateringCan,
+    Pickaxe = 1,
+    Hoe = 2, 
+    WateringCan = 3,
 }
 
 public enum Seed
 {
-    Carrot,
-    Corn,
-    Mushroom,
-    Onion,
-    Pumpkin,
+    Pumpkin = 1000,
+    Onion = 1001,
+    Carrot = 1002,
+    Corn = 1003,
+    Mushroom = 1004
 }
