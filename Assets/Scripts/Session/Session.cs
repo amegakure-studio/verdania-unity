@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class Session : MonoBehaviour
 {
-    [SerializeField] FieldElement m_PlayerId;
-    [SerializeField] UInt64 m_MapId;
-    [SerializeField] UInt64 m_FarmId;
+    private FieldElement m_PlayerId;
+    private UInt64 m_MapId;
+    private UInt64 m_FarmId;
 
     public FieldElement PlayerId { get => m_PlayerId; set => m_PlayerId = value; }
     public ulong MapId { get => m_MapId; set => m_MapId = value; }
