@@ -13,5 +13,6 @@ namespace Dojo
         public string relayWebrtcUrl;
         public uint limit = 100;
         public string worldAddress;
+        public string privateKey;
     }
 }

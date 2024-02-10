@@ -15,11 +15,13 @@ namespace Dojo
         private string relayUrl;
         private string relayWebrtcUrl;
         private string worldAddress;
+        private SigningKey privateKey;
         private SynchronizationMaster synchronizationMaster;
         public ToriiClient toriiClient;
         public ToriiWasmClient wasmClient;
-        [SerializeField] WorldManagerData dojoConfig;
         public event Action<WorldManager> OnEntityFeched;
+
+        [SerializeField] WorldManagerData dojoConfig;
 
         public string ToriiUrl { get => toriiUrl; set => toriiUrl = value; }
         public string RpcUrl { get => rpcUrl; set => rpcUrl = value; }
@@ -27,6 +29,7 @@ namespace Dojo
         public string RelayWebrtcUrl { get => relayWebrtcUrl; set => relayWebrtcUrl = value; }
         public string WorldAddress { get => worldAddress; set => worldAddress = value; }
         public SynchronizationMaster SynchronizationMaster { get => synchronizationMaster; set => synchronizationMaster = value; }
+        public SigningKey PrivateKey { get => privateKey; set => privateKey = value; }
 
         async void Awake()
         {
@@ -35,6 +38,7 @@ namespace Dojo
             RelayUrl = dojoConfig.relayUrl;
             RelayWebrtcUrl = dojoConfig.relayWebrtcUrl;
             WorldAddress = dojoConfig.worldAddress;
+            PrivateKey = new SigningKey(dojoConfig.privateKey);
             SynchronizationMaster = GetComponent<SynchronizationMaster>();
 
 #if UNITY_WEBGL && !UNITY_EDITOR
