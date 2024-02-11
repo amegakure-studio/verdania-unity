@@ -23,7 +23,7 @@ public class LoginController : MonoBehaviour
     {
         try
         {
-            SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();
+            SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();    
             sessionCreator.Create(usernameTxt.text, passwordTxt.text);
 
             SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();

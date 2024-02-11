@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6533d988f54366549804f6246ef766a0, type: 3}
   m_Name: DojoSystemsData
   m_EditorClassIdentifier: 
-  mapSystemAdress: 
-  farmSystemAdress: 
+  mapSystemAdress: 0x4f2f920eb39b363357742752ab970dc7cc60b6132aefd9edd2f5335a6f61bdb
+  farmSystemAdress: 0x627f6f6a532be2c033426b83c325f37996b64fd98723355095cf15d5df27703

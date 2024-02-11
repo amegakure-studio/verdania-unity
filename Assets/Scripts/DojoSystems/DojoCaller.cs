@@ -11,10 +11,10 @@ public class DojoCaller : MonoBehaviour
     private Account account;
     private DojoSystems systems;
 
-    public void Start()
+    public void Awake()
     {
         Init();
-        systems = Resources.Load<DojoSystems>("Config/DojoSystems");
+        systems = Resources.Load<DojoSystems>("Config/DojoSystemsData");
     }
 
     private void Init()
