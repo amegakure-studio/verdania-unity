@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
             TileRenderer tile = hit.collider.GetComponent<TileRenderer>();
             if (tile != null)
             {
-                Debug.Log(clickType + ": " + tile.coordinate.ToString());
                 SetTargetPosition(tile);
             }
         }

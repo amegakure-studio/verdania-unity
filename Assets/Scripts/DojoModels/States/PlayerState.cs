@@ -1,6 +1,7 @@
 using Dojo;
 using Dojo.Starknet;
 using System;
+using System.Numerics;
 
 public class PlayerState : ModelInstance
 {
@@ -20,5 +21,5 @@ public class PlayerState : ModelInstance
     public UInt64 equipmentItemId;
 
     [ModelField("tokens")]
-    public FieldElement tokens;
+    public BigInteger tokens;
 }

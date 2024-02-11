@@ -1,4 +1,5 @@
 using Dojo.Starknet;
+using Dojo.Torii;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,5 +35,6 @@ namespace Dojo
 
         [ModelField("invitation_code")]
         public FieldElement invitation_code;
+
     }
 }

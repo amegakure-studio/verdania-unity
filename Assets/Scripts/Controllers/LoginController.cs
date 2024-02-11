@@ -19,17 +19,17 @@ public class LoginController : MonoBehaviour
         loginBtn.clicked += LoginBtn_clicked;
     }
 
-    private void LoginBtn_clicked()
+    private async void LoginBtn_clicked()
     {
         try
         {
             SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();    
-            sessionCreator.Create(usernameTxt.text, passwordTxt.text);
+            await sessionCreator.Create(usernameTxt.text, passwordTxt.text);
 
             SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
             sceneLoader.LoadNextScene();
 
-        } catch (Exception e) { Debug.Log("Couldn't login. " + e.Message); }
+        } catch (Exception e) { Debug.Log("Couldn't login. " + e); }
         
     }
 

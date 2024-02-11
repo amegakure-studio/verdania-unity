@@ -35,6 +35,8 @@ namespace Dojo
 
         async void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+
             ToriiUrl = dojoConfig.toriiUrl;
             RpcUrl = dojoConfig.rpcUrl;
             RelayUrl = dojoConfig.relayUrl;
