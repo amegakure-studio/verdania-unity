@@ -1,5 +1,6 @@
 using Dojo;
 using Dojo.Starknet;
+using System.Numerics;
 
 public class ERC20Balance : ModelInstance
 {
@@ -10,5 +11,5 @@ public class ERC20Balance : ModelInstance
     public FieldElement account;
 
     [ModelField("amount")]
-    public FieldElement amount;
+    public BigInteger amount;
 }

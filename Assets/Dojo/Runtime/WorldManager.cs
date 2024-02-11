@@ -41,6 +41,7 @@ namespace Dojo
             PrivateKey = new SigningKey(dojoConfig.privateKey);
             SynchronizationMaster = GetComponent<SynchronizationMaster>();
 
+
 #if UNITY_WEBGL && !UNITY_EDITOR
             wasmClient = new ToriiWasmClient(toriiUrl, rpcUrl, relayWebrtcUrl, worldAddress);
             await wasmClient.CreateClient();

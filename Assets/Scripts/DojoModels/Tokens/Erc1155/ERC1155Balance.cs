@@ -1,5 +1,6 @@
 using Dojo;
 using Dojo.Starknet;
+using System.Numerics;
 
 public class ERC1155Balance : ModelInstance
 {
@@ -10,8 +11,8 @@ public class ERC1155Balance : ModelInstance
     public FieldElement account;
 
     [ModelField("id")]
-    public FieldElement id;
+    public BigInteger id;
 
     [ModelField("amount")]
-    public FieldElement amount;
+    public BigInteger amount;
 }

@@ -12000,6 +12000,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
         type: 3}
+      propertyPath: dojoConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: ff386094b5a12f245afd04a756c734d7,
+        type: 2}
+    - target: {fileID: 1648136030876143075, guid: d2e25933f4d69473a8994ee7470b2610,
+        type: 3}
       propertyPath: worldAddress
       value: 0x2b1cf8336cc4eca5a07c4fff03bf999dc7a75505bed5872b9e3810f4ca63bc5
       objectReference: {fileID: 0}

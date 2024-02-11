@@ -1,6 +1,7 @@
 using Dojo;
 using Dojo.Starknet;
 using System;
+using System.Numerics;
 
 public class MarketplaceMeta : ModelInstance
 {
@@ -17,5 +18,5 @@ public class MarketplaceMeta : ModelInstance
     public UInt64 spawnTime;
 
     [ModelField("item_list_len")]
-    public FieldElement itemListLength;
+    public BigInteger itemListLength;
 }
