@@ -15,6 +15,7 @@ namespace Dojo
         private string relayUrl;
         private string relayWebrtcUrl;
         private string worldAddress;
+        private string playerAddress;
         private SigningKey privateKey;
         private SynchronizationMaster synchronizationMaster;
         public ToriiClient toriiClient;
@@ -28,6 +29,7 @@ namespace Dojo
         public string RelayUrl { get => relayUrl; set => relayUrl = value; }
         public string RelayWebrtcUrl { get => relayWebrtcUrl; set => relayWebrtcUrl = value; }
         public string WorldAddress { get => worldAddress; set => worldAddress = value; }
+        public string PlayerAddress { get => playerAddress; set => playerAddress = value; }
         public SynchronizationMaster SynchronizationMaster { get => synchronizationMaster; set => synchronizationMaster = value; }
         public SigningKey PrivateKey { get => privateKey; set => privateKey = value; }
 
@@ -39,6 +41,7 @@ namespace Dojo
             RelayWebrtcUrl = dojoConfig.relayWebrtcUrl;
             WorldAddress = dojoConfig.worldAddress;
             PrivateKey = new SigningKey(dojoConfig.privateKey);
+            PlayerAddress = dojoConfig.playerAddress;
             SynchronizationMaster = GetComponent<SynchronizationMaster>();
 
 
