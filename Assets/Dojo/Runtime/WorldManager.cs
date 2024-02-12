@@ -5,33 +5,55 @@ using Dojo.Torii;
 using System;
 using Dojo.Starknet;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace Dojo
 {
     public class WorldManager : MonoBehaviour
     {
-        [SerializeField] WorldManagerData dojoConfig;
-
+        private string toriiUrl;
+        private string rpcUrl;
+        private string relayUrl;
+        private string relayWebrtcUrl;
+        private string worldAddress;
+        private string playerAddress;
+        private SigningKey privateKey;
+        private SynchronizationMaster synchronizationMaster;
         public ToriiClient toriiClient;
         public ToriiWasmClient wasmClient;
-        public event Action<WorldManager> OnEntityFetched;
+        public event Action<WorldManager> OnEntityFeched;
 
-        private SynchronizationMaster synchronizationMaster;
+        [SerializeField] WorldManagerData dojoConfig;
 
+        public string ToriiUrl { get => toriiUrl; set => toriiUrl = value; }
+        public string RpcUrl { get => rpcUrl; set => rpcUrl = value; }
+        public string RelayUrl { get => relayUrl; set => relayUrl = value; }
+        public string RelayWebrtcUrl { get => relayWebrtcUrl; set => relayWebrtcUrl = value; }
+        public string WorldAddress { get => worldAddress; set => worldAddress = value; }
+        public string PlayerAddress { get => playerAddress; set => playerAddress = value; }
         public SynchronizationMaster SynchronizationMaster { get => synchronizationMaster; set => synchronizationMaster = value; }
+        public SigningKey PrivateKey { get => privateKey; set => privateKey = value; }
 
         async void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+
+            ToriiUrl = dojoConfig.toriiUrl;
+            RpcUrl = dojoConfig.rpcUrl;
+            RelayUrl = dojoConfig.relayUrl;
+            RelayWebrtcUrl = dojoConfig.relayWebrtcUrl;
+            WorldAddress = dojoConfig.worldAddress;
+            PrivateKey = new SigningKey(dojoConfig.privateKey);
+            PlayerAddress = dojoConfig.playerAddress;
             SynchronizationMaster = GetComponent<SynchronizationMaster>();
 
+
 #if UNITY_WEBGL && !UNITY_EDITOR
-            wasmClient = new ToriiWasmClient(dojoConfig.toriiUrl, dojoConfig.rpcUrl,
-                                                dojoConfig.relayWebrtcUrl, dojoConfig.worldAddress);
-                await wasmClient.CreateClient();
+            wasmClient = new ToriiWasmClient(toriiUrl, rpcUrl, relayWebrtcUrl, worldAddress);
+            await wasmClient.CreateClient();
 #else
-            toriiClient = new ToriiClient(dojoConfig.toriiUrl, dojoConfig.rpcUrl,
-                                            dojoConfig.relayUrl, dojoConfig.worldAddress);
+            toriiClient = new ToriiClient(ToriiUrl, RpcUrl, RelayUrl, WorldAddress);
 #endif
 
 
@@ -41,24 +63,30 @@ namespace Dojo
 #if UNITY_WEBGL && !UNITY_EDITOR
             await synchronizationMaster.SynchronizeEntities();
 #else
-            await SynchronizationMaster.SynchronizeEntities();
+            SynchronizationMaster.SynchronizeEntities();
 #endif
-            StartCoroutine(nameof(NotifySubscribers));
-            
+            OnEntityFeched?.Invoke(this);
+
             // listen for entity updates
             SynchronizationMaster.RegisterEntityCallbacks();
         }
 
-        private IEnumerator NotifySubscribers()
+        private void OnEnable()
         {
-            yield return new WaitUntil(() => OnEntityFetched != null);
-
-            OnEntityFetched?.Invoke(this);
+            SceneManager.activeSceneChanged += SceneChange;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void SceneChange(Scene current, Scene next)
         {
+            StartCoroutine(nameof(NotifySubscribers));
+        }
+
+        private IEnumerator NotifySubscribers()
+        {
+            yield return new WaitUntil(() => OnEntityFeched != null);
+
+            OnEntityFeched?.Invoke(this);
+            //Debug.Log("Fetched called!");
         }
 
 

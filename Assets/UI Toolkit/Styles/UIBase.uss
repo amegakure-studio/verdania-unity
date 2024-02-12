@@ -1,0 +1,79 @@
+.menuContainer {
+    flex-grow: 0;
+    flex-direction: row;
+    width: 40%;
+    height: 100%;
+    border-left-color: rgb(250, 168, 72);
+    border-right-color: rgb(250, 168, 72);
+    border-top-color: rgb(250, 168, 72);
+    border-bottom-color: rgb(250, 168, 72);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    flex-basis: auto;
+    margin-left: 2%;
+}
+
+.menuBtn {
+    visibility: visible;
+    -unity-text-align: middle-left;
+    min-width: 0;
+    flex-direction: column;
+    margin-bottom: 0;
+    background-image: url('project://database/Assets/UI/Sprites/01/%D0%A1ommonElement/BtnDefault.png?fileID=21300000&guid=c8e174f398c87144a8f7c3287d306fd1&type=3#BtnDefault');
+    min-height: auto;
+    max-width: none;
+    max-height: none;
+    text-overflow: clip;
+    margin-top: 0;
+    color: rgb(255, 255, 255);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-style: bold;
+    background-color: rgb(0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    height: 29%;
+    flex-shrink: 0;
+    width: 20%;
+    font-size: 18px;
+    align-self: center;
+}
+
+.menuTitle {
+    -unity-text-align: upper-center;
+    -unity-font: url('project://database/Assets/Art/UI/Fonts/new_GI_font.ttf?fileID=12800000&guid=fb7b8f63b476ac5019701b5a8bd99b7d&type=3#new_GI_font');
+    -unity-font-definition: url('project://database/Assets/Art/UI/Fonts/new_GI_font%20SDF.asset?fileID=11400000&guid=62d9a3a0ccb2db3468f1e0222f18d4e3&type=2#new_GI_font SDF');
+    font-size: 55px;
+    color: rgb(221, 221, 221);
+    -unity-font-style: normal;
+    text-shadow: 5px 5px 1px rgba(0, 0, 0, 0);
+    letter-spacing: 0;
+    background-color: rgba(250, 250, 250, 0);
+}
+
+#unity-text-input {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(221, 221, 221);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(149, 149, 149);
+    border-right-color: rgb(149, 149, 149);
+    border-top-color: rgb(149, 149, 149);
+    border-bottom-color: rgb(149, 149, 149);
+}

@@ -66,7 +66,11 @@ namespace Dojo
             // but its already instantiated
             else if (field.FieldType.IsPrimitive || field.FieldType == typeof(FieldElement) || field.FieldType == typeof(BigInteger))
             {
-                field.SetValue(instance, Convert.ChangeType(value, field.FieldType));
+                try
+                {
+                    field.SetValue(instance, Convert.ChangeType(value, field.FieldType));
+                }
+                catch { Debug.Log("Error: " + field.FieldType + " of: " + instance.GetType() + " Value: " + value.ToString()); }
             }
             // if the field is a struct/class. we check if our member is a dictionary
             // and we go through each of its keys and values and set them to the fields
