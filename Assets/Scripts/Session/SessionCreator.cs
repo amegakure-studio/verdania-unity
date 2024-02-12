@@ -9,10 +9,12 @@ using UnityEngine;
 public class SessionCreator : MonoBehaviour
 {
     private FarmSystem farmSystem;
+    private SkinSystem skinSystem;
 
     private void Awake()
     {
         farmSystem = UnityUtils.FindOrCreateComponent<FarmSystem>();
+        skinSystem = UnityUtils.FindOrCreateComponent<SkinSystem>();
     }
 
     public async Task<Session> Create(string username, string password)
@@ -36,7 +38,7 @@ public class SessionCreator : MonoBehaviour
 
         if (playerFarmState == null)
         {
-            farmSystem.CreatePlayer(playerId);
+            farmSystem.CreateFarm(playerId);
             
             while (playerFarmState == null)
             {

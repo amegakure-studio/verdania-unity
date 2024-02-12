@@ -4,27 +4,9 @@ using Dojo;
 using Dojo.Starknet;
 using dojo_bindings;
 
-public class FarmSystem : MonoBehaviour
+public class FarmSystem : DojoSystem
 {
-    private WorldManager worldManager;
-    private JsonRpcClient provider;
-    private Account account;
-    private DojoSystems systems;
-
-    public void Awake()
-    {
-        Init();
-        systems = Resources.Load<DojoSystems>("Config/DojoSystemsData");
-    }
-
-    private void Init()
-    {
-        worldManager = FindObjectOfType<WorldManager>();
-        provider = new JsonRpcClient(worldManager.RpcUrl);
-        account = new Account(provider, worldManager.PrivateKey, new FieldElement(worldManager.PlayerAddress));
-    }
-
-    public async void CreatePlayer(string playerId)
+    public async void CreateFarm(string playerId)
     {
         Debug.Log("created: " + playerId);
         var player_id = new FieldElement(playerId).Inner();

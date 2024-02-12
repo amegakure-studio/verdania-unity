@@ -2,7 +2,7 @@ using System;
 using Dojo;
 using Dojo.Starknet;
 
-public enum GenderType
+public enum SkinType
 {
     None,
     Boy,
@@ -18,5 +18,5 @@ public class PlayerSkin : ModelInstance
     public FieldElement playerSkinName;
 
     [ModelField("gender")]
-    public GenderType gender;
+    public SkinType gender;
 }
