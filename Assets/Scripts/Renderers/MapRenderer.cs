@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera;
 
 public class MapRenderer : MonoBehaviour
 {  
@@ -20,6 +19,18 @@ public class MapRenderer : MonoBehaviour
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
         m_WorldManager.OnEntityFeched += Render;
+
+        EventManager.Instance.Subscribe(GameEvent.SPAWN_MAPELEMENT, HandleSpawnElement);
+    }
+
+    private void HandleSpawnElement(Dictionary<string, object> context)
+    {
+        try
+        {
+            TileState tileState = (TileState)context["Element"];
+            RenderObject(m_WorldManager.Entities(), tileState);
+
+        } catch { }
     }
 
     void Awake()
@@ -42,7 +53,7 @@ public class MapRenderer : MonoBehaviour
     private void Render(WorldManager worldManager)
     {
         RenderMap(worldManager);
-        RenderObject(worldManager);
+        RenderObjects(worldManager);
     }
 
     private void RenderMap(WorldManager worldManager)
@@ -74,22 +85,14 @@ public class MapRenderer : MonoBehaviour
         }
     }
 
-    private void RenderObject(WorldManager worldManager)
+    private void RenderObjects(WorldManager worldManager)
     {
         GameObject[] entities = worldManager.Entities();
         List<TileState> tilesState = m_Finder.GetTileStatesByFarmID(m_Session.FarmId, entities);
         
         foreach(TileState tileState in tilesState)
         {
-            if ((TileStateT) tileState.entityType == TileStateT.Crop)
-            {
-                createCrops(entities, tileState);
-            }
-
-            if ((TileStateT)tileState.entityType == TileStateT.Enviroment)
-            {
-                createEnvEntities(entities, tileState);
-            }
+            RenderObject(entities, tileState);
         }
 
         //DebugCropCreator(new(0, 38), "Corn", "0");
@@ -122,6 +125,18 @@ public class MapRenderer : MonoBehaviour
         //DebugCropCreator(new(4, 41), "Pumpkin", "100");
     }
 
+    private void RenderObject(GameObject[] entities, TileState tileState)
+    {
+        if ((TileStateT)tileState.entityType == TileStateT.Crop)
+        {
+            createCrops(entities, tileState);
+        }
+
+        if ((TileStateT)tileState.entityType == TileStateT.Enviroment)
+        {
+            createEnvEntities(entities, tileState);
+        }
+    }
 
     private void DebugCropCreator(Vector2Int tileCoordinate, string cropName, string cropGrowId )
     {
