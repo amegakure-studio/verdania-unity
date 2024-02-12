@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera;
 
 public class MapRenderer : MonoBehaviour
 {  
@@ -91,16 +92,50 @@ public class MapRenderer : MonoBehaviour
             }
         }
 
-        TileState debugState = tilesState[0];
-        
-        EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(debugState.farmId, debugState.entityIndex, entities);
-        Vector2Int tileCoordinate = new((int)envEntityState.y, (int)envEntityState.x);
+        //DebugCropCreator(new(0, 38), "Corn", "0");
+        //DebugCropCreator(new(0, 39), "Corn", "25");
+        //DebugCropCreator(new(0, 40), "Corn", "50");
+        //DebugCropCreator(new(0, 41), "Corn", "100");
+
+
+        //DebugCropCreator(new(1, 38), "Mushroom", "0");
+        //DebugCropCreator(new(1, 39), "Mushroom", "25");
+        //DebugCropCreator(new(1, 40), "Mushroom", "50");
+        //DebugCropCreator(new(1, 41), "Mushroom", "100");
+
+
+        //DebugCropCreator(new(2, 38), "Onion", "0");
+        //DebugCropCreator(new(2, 39), "Onion", "25");
+        //DebugCropCreator(new(2, 40), "Onion", "50");
+        //DebugCropCreator(new(2, 41), "Onion", "100");
+
+
+        //DebugCropCreator(new(3, 38), "Carrot", "0");
+        //DebugCropCreator(new(3, 39), "Carrot", "25");
+        //DebugCropCreator(new(3, 40), "Carrot", "50");
+        //DebugCropCreator(new(3, 41), "Carrot", "100");
+
+
+        //DebugCropCreator(new(4, 38), "Pumpkin", "0");
+        //DebugCropCreator(new(4, 39), "Pumpkin", "25");
+        //DebugCropCreator(new(4, 40), "Pumpkin", "50");
+        //DebugCropCreator(new(4, 41), "Pumpkin", "100");
+    }
+
+
+    private void DebugCropCreator(Vector2Int tileCoordinate, string cropName, string cropGrowId )
+    {
         
         TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
-        GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + "Rock");
-        Debug.Log(objectPrefab.name);
-        tileRenderer.OccupyingObject = objectPrefab;
 
+        string landPath = folderResourcesConfig.objectsFolder + "SuitableForCrop";
+        GameObject landPrefab = Resources.Load<GameObject>(landPath);
+        tileRenderer.OccupyingObject = landPrefab;
+
+        string cropPath = folderResourcesConfig.cropsFolder + cropName + "/" + cropName + "_" + cropGrowId;
+
+        GameObject cropPrefab = Resources.Load<GameObject>(cropPath);
+        tileRenderer.AddObject(cropPrefab);
     }
 
     private void createEnvEntities(GameObject[] entities, TileState tileState)
@@ -149,9 +184,24 @@ public class MapRenderer : MonoBehaviour
                     TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
 
                     Debug.Log(crop.name);
+                    string growId = "";
 
-                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.cropsFolder + crop.name);
-                    tileRenderer.OccupyingObject = objectPrefab;
+                    if(cropState.growingProgress < 25)
+                        growId = "0";
+                    else if (cropState.growingProgress >= 25 && cropState.growingProgress < 50)
+                        growId = "25";
+                    else if (cropState.growingProgress >= 50 && cropState.growingProgress < 100)
+                        growId = "50";
+                    else if (cropState.growingProgress == 100)
+                        growId = "100";
+
+                    string landPath = folderResourcesConfig.objectsFolder + "SuitableForCrop";
+                    GameObject landPrefab = Resources.Load<GameObject>(landPath);
+                    tileRenderer.OccupyingObject = landPrefab;
+
+                    string cropPath = folderResourcesConfig.cropsFolder + crop.name + "/" + crop.name + "_" + growId;
+                    GameObject cropPrefab = Resources.Load<GameObject>(cropPath);
+                    tileRenderer.AddObject(cropPrefab);
                 }
             }
         }
