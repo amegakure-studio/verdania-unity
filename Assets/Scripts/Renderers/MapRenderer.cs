@@ -1,8 +1,6 @@
 using Amegakure.Verdania.DojoModels;
 using Amegakure.Verdania.GridSystem;
 using Dojo;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -48,7 +46,6 @@ public class MapRenderer : MonoBehaviour
             if (tile.tileType == TileType.Bridge || tile.tileType == TileType.Building)
             {
                 Vector2Int tileCoordinate = new((int)tile.x, (int)tile.y);
-                Debug.Log(tileCoordinate);
                  
                 if (m_TileRenderers.ContainsKey(tileCoordinate))
                 {       

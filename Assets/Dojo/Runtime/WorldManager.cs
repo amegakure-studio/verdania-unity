@@ -5,6 +5,8 @@ using Dojo.Torii;
 using System;
 using Dojo.Starknet;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace Dojo
 {
@@ -69,9 +71,22 @@ namespace Dojo
             SynchronizationMaster.RegisterEntityCallbacks();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnEnable()
         {
+            SceneManager.activeSceneChanged += SceneChange;
+        }
+
+        private void SceneChange(Scene current, Scene next)
+        {
+            StartCoroutine(nameof(NotifySubscribers));
+        }
+
+        private IEnumerator NotifySubscribers()
+        {
+            yield return new WaitUntil(() => OnEntityFeched != null);
+
+            OnEntityFeched?.Invoke(this);
+            //Debug.Log("Fetched called!");
         }
 
 
