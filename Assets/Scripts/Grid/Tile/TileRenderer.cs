@@ -20,6 +20,7 @@ namespace Amegakure.Verdania.GridSystem
         private float costFromOrigin = 0;
         private float costToDestination = 0;
         private int terrainCost = 0;
+        private bool occupied = false;
         #endregion
 
         private void Awake()
@@ -94,9 +95,9 @@ namespace Amegakure.Verdania.GridSystem
         }
 
         public Vector2Int Coordinate { get => coordinate; set => coordinate = value; }
-        public bool Occupied() { return occupyingObject != null; }
+        public bool Occupied { get => occupied; set => occupied = value; }
         public bool InFrontier { get; set; } = false;
-        public bool CanBeReached { get { return !Occupied() && InFrontier; } }
+        public bool CanBeReached { get { return !Occupied && InFrontier; } }
         public float Cost { get => cost; set => cost = value; }
         public TileRenderer Parent { get => parent; set => parent = value; }
         public TileRenderer ConnectedTile { get => connectedTile; set => connectedTile = value; }

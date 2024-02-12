@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropsFolder: Crops/
   charactersFolder: Characters/
+  mapFolder: Map/
   objectsFolder: Objects/
   npcFolder: NPC/

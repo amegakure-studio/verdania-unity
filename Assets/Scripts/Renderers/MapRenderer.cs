@@ -17,7 +17,7 @@ public class MapRenderer : MonoBehaviour
     private void OnEnable()
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
-        m_WorldManager.OnEntityFeched += Create;
+        m_WorldManager.OnEntityFeched += Render;
     }
 
     void Awake()
@@ -34,29 +34,40 @@ public class MapRenderer : MonoBehaviour
 
     void OnDisable()
     {
-        m_WorldManager.OnEntityFeched -= Create;
+        m_WorldManager.OnEntityFeched -= Render;
     }
 
-    private void Create(WorldManager worldManager)
+    private void Render(WorldManager worldManager)
+    {
+        RenderMap(worldManager);
+    }
+
+    private void RenderMap(WorldManager worldManager)
     {
         List<Tile> tiles = m_Finder.GetTilesByMapID(m_Session.MapId, worldManager.Entities());
         
         foreach (Tile tile in tiles) 
-        { 
-            if (tile.tileType == TileType.Bridge || tile.tileType == TileType.Building)
+        {
+            Vector2Int tileCoordinate = new((int)tile.x, (int)tile.y);
+
+            if (m_TileRenderers.ContainsKey(tileCoordinate))
             {
-                Vector2Int tileCoordinate = new((int)tile.x, (int)tile.y);
-                 
-                if (m_TileRenderers.ContainsKey(tileCoordinate))
-                {       
+                if (tile.tileType == TileType.Bridge || tile.tileType == TileType.Building)
+                {
                     TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
-                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + tile.tileType.ToString());
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.mapFolder + tile.tileType.ToString());
 
                     tileRenderer.OccupyingObject = objectPrefab;
                 }
-                else
-                    Debug.LogError("Tile " + tileCoordinate.ToString() + " exists in dojo but not in Unity");
-            }              
+                if (tile.tileType == TileType.Water || tile.tileType == TileType.NotWalkable)
+                {
+                    TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
+                    tileRenderer.Occupied = true;
+                }
+            }
+            else
+                Debug.LogError("Tile " + tileCoordinate.ToString() + " exists in dojo but not in Unity");
+
         }
     }
 }

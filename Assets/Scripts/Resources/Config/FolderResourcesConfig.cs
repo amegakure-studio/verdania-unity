@@ -7,6 +7,7 @@ public class FolderResourcesConfig : ScriptableObject
 {
     public string cropsFolder;
     public string charactersFolder;
+    public string mapFolder;
     public string objectsFolder;
     public string npcFolder;
 }
