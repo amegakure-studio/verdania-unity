@@ -4,6 +4,8 @@ using Dojo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class MapRenderer : MonoBehaviour
@@ -173,13 +175,56 @@ public class MapRenderer : MonoBehaviour
                 {
                     TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
 
-                    Debug.Log(envEntity.name);
+                    string nameString = HexToString(envEntity.entityName.Hex());
 
-                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + envEntity.name);
+                    Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString);
+
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString);
                     tileRenderer.OccupyingObject = objectPrefab;
                 }
             }
         }
+    }
+
+    private string HexToString(string hexString)
+    {
+        // Remove the "0x" prefix
+        hexString = hexString.Substring(2);
+        
+        // Find the index of the first non-zero character
+        int firstNonZeroIndex = 0;
+        for (int i = 0; i < hexString.Length; i++)
+        {
+            if (hexString[i] != '0')
+            {
+                firstNonZeroIndex = i;
+                break;
+            }
+        }
+
+        // Extract the substring from the first non-zero character to the end of the string
+        hexString = hexString.Substring(firstNonZeroIndex);
+
+        // Convert the hex string to bytes
+        byte[] bytes = new byte[hexString.Length / 2];
+
+        for (int i = 0; i < hexString.Length; i += 2)
+        {
+            bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+        }
+
+        // Trim trailing null bytes
+        int length = Array.FindLastIndex(bytes, b => b != 0) + 1;
+        byte[] trimmedBytes = new byte[length];
+        Array.Copy(bytes, trimmedBytes, length);
+
+        // Debug output: Display byte array content in hexadecimal format
+        Debug.Log(BitConverter.ToString(trimmedBytes));
+
+        // Convert byte array to string using UTF-8 encoding
+        string stringValue = Encoding.UTF8.GetString(trimmedBytes);
+
+        return stringValue;
     }
 
     private void createCrops(GameObject[] entities, TileState tileState)
