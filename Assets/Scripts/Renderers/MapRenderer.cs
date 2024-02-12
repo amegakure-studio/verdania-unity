@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public class MapRenderer : MonoBehaviour
 {  
@@ -79,29 +78,81 @@ public class MapRenderer : MonoBehaviour
         GameObject[] entities = worldManager.Entities();
         List<TileState> tilesState = m_Finder.GetTileStatesByFarmID(m_Session.FarmId, entities);
         
-        TileState tileState = tilesState[0];
-        if ((TileStateT) tileState.entityType == TileStateT.Crop)
+        foreach(TileState tileState in tilesState)
         {
-            CropState cropState = m_Finder.GetCropStateByIndex(tileState.farmId, tileState.entityIndex, entities);
-            
-            if (cropState != null)
+            if ((TileStateT) tileState.entityType == TileStateT.Crop)
             {
-                Crop crop = m_Finder.GetCropById(cropState.cropId, entities);
-                Debug.Log(crop.name);
+                createCrops(entities, tileState);
+            }
+
+            if ((TileStateT)tileState.entityType == TileStateT.Enviroment)
+            {
+                createEnvEntities(entities, tileState);
             }
         }
 
-        if ((TileStateT)tileState.entityType == TileStateT.Enviroment)
-        {
-            EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(tileState.farmId, tileState.entityIndex, entities);
+        TileState debugState = tilesState[0];
+        
+        EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(debugState.farmId, debugState.entityIndex, entities);
+        Vector2Int tileCoordinate = new((int)envEntityState.y, (int)envEntityState.x);
+        
+        TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
+        GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + "Rock");
+        Debug.Log(objectPrefab.name);
+        tileRenderer.OccupyingObject = objectPrefab;
 
-            if (envEntityState != null)
+    }
+
+    private void createEnvEntities(GameObject[] entities, TileState tileState)
+    {
+        EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(tileState.farmId, tileState.entityIndex, entities);
+
+        if (envEntityState != null)
+        {
+            //Debug.Log("index: " + envEntityState.index);
+            //Debug.Log("envEntityid: " + envEntityState.envEntityId);
+            //Debug.Log("x: " + envEntityState.x + "y: " + envEntityState.y);
+
+            Vector2Int tileCoordinate = new((int)envEntityState.x, (int)envEntityState.y);
+
+            if (m_TileRenderers.ContainsKey(tileCoordinate))
             {
-                Debug.Log("index: " + envEntityState.index);
-                Debug.Log("envEntityid: " + envEntityState.envEntityId);
-                Debug.Log("x: " + envEntityState.x + "y: " + envEntityState.y);
                 EnvEntity envEntity = m_Finder.GetEnvEntityById(envEntityState.envEntityId, entities);
-                Debug.Log(envEntity.name);
+
+                if (envEntity != null)
+                {
+                    TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
+
+                    Debug.Log(envEntity.name);
+
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + envEntity.name);
+                    tileRenderer.OccupyingObject = objectPrefab;
+                }
+            }
+        }
+    }
+
+    private void createCrops(GameObject[] entities, TileState tileState)
+    {
+        CropState cropState = m_Finder.GetCropStateByIndex(tileState.farmId, tileState.entityIndex, entities);
+
+        if (cropState != null)
+        {
+            Vector2Int tileCoordinate = new((int)cropState.x, (int)cropState.y);
+
+            if (m_TileRenderers.ContainsKey(tileCoordinate))
+            {
+                Crop crop = m_Finder.GetCropById(cropState.cropId, entities);
+
+                if (crop != null)
+                {
+                    TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
+
+                    Debug.Log(crop.name);
+
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.cropsFolder + crop.name);
+                    tileRenderer.OccupyingObject = objectPrefab;
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Dojo
         [ModelField("map_id")]
         public UInt64 map_id;
 
-        [ModelField("farm_id")]
+        [ModelField("id")]
         public UInt64 farm_id;
 
         [ModelField("name")]
