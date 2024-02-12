@@ -98,9 +98,26 @@ public class MapFinder : MonoBehaviour
 
             if (envEntity != null)
             {
-                Debug.Log("envEntity In dojo: " + envEntity.id);
+                //Debug.Log("envEntity In dojo: " + envEntity.id);
                 if (envEntity.id == id)
                     return envEntity;
+            }
+        }
+
+        return null;
+    }
+
+
+    public PlayerState GetPlayerStateById(string hexId, UInt64 farmId,  GameObject[] entities)
+    {
+        foreach (GameObject go in entities)
+        {
+            PlayerState playerState = go.GetComponent<PlayerState>();
+
+            if (playerState != null)
+            {
+                if (playerState.player.Hex().Equals(hexId))
+                    return playerState;
             }
         }
 

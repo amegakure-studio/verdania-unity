@@ -5,27 +5,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] PathFinder pathFinder;
-    [SerializeField] Character character;
+    private PathFinder pathFinder;
+    private Character character;
+
+    public Character Character { get => character; set => character = value; }
+
+    private void Awake()
+    {
+        pathFinder = GameObject.FindObjectOfType<PathFinder>();
+    }
 
     void Update()
     {
-        character.HandleMovement();
+        if(Character != null)
+        {
+            Character.HandleMovement();
 
-        string clickType = Input.GetMouseButtonDown(0) ? "Left" :
-                    Input.GetMouseButtonDown(1) ? "Right" : null;
+            string clickType = Input.GetMouseButtonDown(0) ? "Left" :
+                        Input.GetMouseButtonDown(1) ? "Right" : null;
 
-        if (clickType != null)
-            HandleClick(clickType);
+            if (clickType != null)
+                HandleClick(clickType);
 
-        if (Input.GetKeyDown(KeyCode.K))
-            EventManager.Instance.Publish(GameEvent.CHARACTER_HOE, new() { { "Character", character.gameObject } });
+            if (Input.GetKeyDown(KeyCode.K))
+                EventManager.Instance.Publish(GameEvent.CHARACTER_HOE, new() { { "Character", Character.gameObject } });
 
-        else if (Input.GetKeyDown(KeyCode.L))
-            EventManager.Instance.Publish(GameEvent.CHARACTER_PLANT, new() { { "Character", character.gameObject } });
+            else if (Input.GetKeyDown(KeyCode.L))
+                EventManager.Instance.Publish(GameEvent.CHARACTER_PLANT, new() { { "Character", Character.gameObject } });
 
-        else if (Input.GetKeyDown(KeyCode.J))
-            EventManager.Instance.Publish(GameEvent.CHARACTER_WATER, new() { { "Character", character.gameObject } });
+            else if (Input.GetKeyDown(KeyCode.J))
+                EventManager.Instance.Publish(GameEvent.CHARACTER_WATER, new() { { "Character", Character.gameObject } });
+        }
     }
 
     private void HandleClick(string clickType)
@@ -46,13 +56,13 @@ public class PlayerController : MonoBehaviour
 
     private void SetTargetPosition(TileRenderer targetTile)
     {
-        if(targetTile.coordinate != character.CurrentTile.coordinate)
+        if(targetTile.coordinate != Character.CurrentTile.coordinate)
         {
-            character.CurrentPathIndex = 0;
+            Character.CurrentPathIndex = 0;
             List<TileRenderer> tiles = new();
-            tiles.AddRange(pathFinder.FindPath(character.CurrentTile, targetTile).tiles);
+            tiles.AddRange(pathFinder.FindPath(Character.CurrentTile, targetTile).tiles);
             
-            character.PathVectorList = tiles;
+            Character.PathVectorList = tiles;
         }
     }
 }

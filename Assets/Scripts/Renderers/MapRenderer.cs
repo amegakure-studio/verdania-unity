@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 using UnityEngine;
 
 public class MapRenderer : MonoBehaviour
@@ -54,8 +53,43 @@ public class MapRenderer : MonoBehaviour
 
     private void Render(WorldManager worldManager)
     {
+        Debug.Log("Called?");
         RenderMap(worldManager);
         RenderObjects(worldManager);
+        RenderPlayer(worldManager);
+    }
+
+    private void RenderPlayer(WorldManager worldManager)
+    {
+        PlayerState playerState = m_Finder.GetPlayerStateById(m_Session.PlayerId.Hex(), m_Session.FarmId, worldManager.Entities());
+        if (playerState != null)
+        {
+            Vector2Int tileCoordinate = new((int)playerState.x, (int)playerState.y);
+            if (m_TileRenderers.ContainsKey(tileCoordinate))
+            {
+                TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
+                string characterPath = folderResourcesConfig.charactersFolder + "AliceVrm";
+                
+                GameObject characterPrefab = Resources.Load<GameObject>(characterPath);
+                GameObject characterGo = Instantiate(characterPrefab);
+                Debug.Log("Creation");
+
+                characterGo.transform.position = tileRenderer.transform.position;
+
+                Character character = characterGo.GetComponent<Character>();
+                if (character != null) 
+                {
+                    Debug.Log("set coordinate");
+                    character.CurrentTile = tileRenderer;
+                }
+
+                PlayerController controller = characterGo.AddComponent<PlayerController>();
+                controller.Character = character;
+
+                //TODO: Set camera look at the prefab
+            }
+        }
+
     }
 
     private void RenderMap(WorldManager worldManager)

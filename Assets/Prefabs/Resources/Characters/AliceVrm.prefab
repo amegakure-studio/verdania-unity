@@ -380,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 2766088583055928845, guid: 0ddb123373c35374ab921a5e71f95277,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3254077529358578871, guid: 0ddb123373c35374ab921a5e71f95277,
         type: 3}
@@ -559,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
@@ -569,22 +569,22 @@ PrefabInstance:
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 227.87
+      value: 223.4958
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 90.18
+      value: 90.11901
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 175.74
+      value: 177.09999
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
@@ -769,7 +769,7 @@ MonoBehaviour:
   stepRayUpper: {fileID: 6009520135494949032}
   stepRayLower: {fileID: 3945240070608716631}
   stepHeight: 0.3
-  stepSmooth: 2
+  stepSmooth: 0.2
 --- !u!136 &2794826308782638074
 CapsuleCollider:
   m_ObjectHideFlags: 0
