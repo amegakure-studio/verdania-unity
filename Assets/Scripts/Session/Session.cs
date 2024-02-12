@@ -11,6 +11,6 @@ public class Session : MonoBehaviour
     private UInt64 m_FarmId;
 
     public FieldElement PlayerId { get => m_PlayerId; set => m_PlayerId = value; }
-    public ulong MapId { get => m_MapId; set => m_MapId = value; }
-    public ulong FarmId { get => m_FarmId; set => m_FarmId = value; }
+    public UInt64 MapId { get => m_MapId; set => m_MapId = value; }
+    public UInt64 FarmId { get => m_FarmId; set => m_FarmId = value; }
 }
