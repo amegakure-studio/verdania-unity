@@ -177,7 +177,7 @@ public class MapRenderer : MonoBehaviour
 
                     string nameString = HexToString(envEntity.entityName.Hex());
 
-                    Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString);
+                    //Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString);
 
                     GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString);
                     tileRenderer.OccupyingObject = objectPrefab;
@@ -217,9 +217,6 @@ public class MapRenderer : MonoBehaviour
         int length = Array.FindLastIndex(bytes, b => b != 0) + 1;
         byte[] trimmedBytes = new byte[length];
         Array.Copy(bytes, trimmedBytes, length);
-
-        // Debug output: Display byte array content in hexadecimal format
-        Debug.Log(BitConverter.ToString(trimmedBytes));
 
         // Convert byte array to string using UTF-8 encoding
         string stringValue = Encoding.UTF8.GetString(trimmedBytes);
