@@ -7,6 +7,7 @@ public class LoginController : MonoBehaviour
     private TextField usernameTxt;
     private TextField passwordTxt;
     private Button loginBtn;
+    private Button signUpBtn;
 
     private void Start()
     {
@@ -17,6 +18,15 @@ public class LoginController : MonoBehaviour
 
         loginBtn = root.Q<Button>("LoginBtn");
         loginBtn.clicked += LoginBtn_clicked;
+
+        signUpBtn = root.Q<Button>("SignUpBtn");
+        signUpBtn.clicked += signUpBtn_clicked;
+    }
+
+    private void signUpBtn_clicked()
+    {
+        SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
+        sceneLoader.LoadNextScene();
     }
 
     private void LoginBtn_clicked()
@@ -39,5 +49,6 @@ public class LoginController : MonoBehaviour
     private void OnDestroy()
     {
         loginBtn.clicked -= LoginBtn_clicked;
+        signUpBtn.clicked -= signUpBtn_clicked;
     }
 }
