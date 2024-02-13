@@ -1,8 +1,10 @@
 using Dojo;
 using Dojo.Starknet;
 using dojo_bindings;
+using System;
 using System.Collections;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -61,25 +63,6 @@ public class SessionCreator : MonoBehaviour
         return null;
     }
 
-    private async Task<PlayerFarmState> FindOrCreatePlayer(string username, string password)
-    {
-        string playerId = GetPlayerHash(username, password);
-        PlayerFarmState playerFarmState = FindPlayer(playerId);
-
-        if (playerFarmState == null)
-        {
-            farmSystem.CreateFarm(playerId);
-            
-            while (playerFarmState == null)
-            {
-                playerFarmState = FindPlayer(playerId);
-                await Task.Delay(1000);
-            }
-        }
-        return playerFarmState;
-    }
-
-
     private PlayerFarmState FindPlayer(string playerId)
     {
         WorldManager worldManager = GameObject.FindAnyObjectByType<WorldManager>();
@@ -100,5 +83,57 @@ public class SessionCreator : MonoBehaviour
         playerHash.Append(password);
 
         return playerHash.ToString();
+    }
+
+    public async void CreateNewPlayer(string username, string password, SkinType gender)
+    {
+        PlayerFarmState playerFarmState = FindPlayerFarmState(username, password);
+        if (playerFarmState == null)
+        {
+            string playerId = GetPlayerHash(username, password);
+            
+            try
+            {
+                string usernameHex = StringToHex(username);
+                await skinSystem.CreatePlayer(playerId, usernameHex, gender);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error in skin system: " + e );
+                throw new Exception("Error in skin system");
+            }
+
+            await Task.Delay(1000);
+
+            try
+            {
+                await farmSystem.CreateFarm(playerId);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error in farm system: " + e );
+                throw new Exception("Error in farm system");
+            }
+        }
+        else
+        {
+            throw new Exception("The playe exist!!");
+        }
+    }
+
+    private string StringToHex(string input)
+    {
+        // Convert the string to a byte array
+        byte[] bytes = Encoding.UTF8.GetBytes(input);
+        
+        // Convert each byte to its hexadecimal representation
+        StringBuilder hexBuilder = new StringBuilder(bytes.Length * 2);
+        foreach (byte b in bytes)
+        {
+            hexBuilder.AppendFormat("{0:x2}", b); // "x2" formats the byte as a two-digit hexadecimal number
+        }
+        
+        // Return the hexadecimal string
+        return hexBuilder.ToString();
     }
 }

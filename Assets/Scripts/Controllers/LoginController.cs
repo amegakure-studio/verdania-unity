@@ -36,6 +36,7 @@ public class LoginController : MonoBehaviour
             SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();    
             Session session = sessionCreator.GetSessionFromExistingPlayer(usernameTxt.text, passwordTxt.text);
 
+            
             if (session != null)
             {
                 SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
