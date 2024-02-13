@@ -17,6 +17,14 @@ public class Character : MonoBehaviour
     [SerializeField] float stepHeight = 0.3f;
     [SerializeField] float stepSmooth = 2f;
 
+    [Header("BodyParts")]
+    [SerializeField] Transform head;
+
+    [Header("Rig")]
+    [SerializeField] GameObject headRig;
+    [SerializeField] GameObject spineRig;
+
+
     public List<TileRenderer> PathVectorList
     {
         get => pathVectorList;
@@ -32,6 +40,9 @@ public class Character : MonoBehaviour
     }
     public int CurrentPathIndex { get => currentPathIndex; set => currentPathIndex = value; }
     public TileRenderer CurrentTile { get => currentTile; set => currentTile = value; }
+    public Transform Head { get => head; set => head = value; }
+    public GameObject HeadRig { get => headRig; set => headRig = value; }
+    public GameObject SpineRig { get => spineRig; set => spineRig = value; }
 
     private void Start()
     {

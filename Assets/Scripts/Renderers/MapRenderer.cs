@@ -86,7 +86,7 @@ public class MapRenderer : MonoBehaviour
                 PlayerController controller = characterGo.AddComponent<PlayerController>();
                 controller.Character = character;
 
-                //TODO: Set camera look at the prefab
+                EventManager.Instance.Publish(GameEvent.PLAYER_CREATED, new() { { "Player", character } });
             }
         }
 

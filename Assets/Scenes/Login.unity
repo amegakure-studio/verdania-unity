@@ -8962,21 +8962,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6681853158738111718, guid: aa02a670638d42d4bb452ea0dbfb156e,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681853158738111718, guid: aa02a670638d42d4bb452ea0dbfb156e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681853158738111718, guid: aa02a670638d42d4bb452ea0dbfb156e,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681853158738111718, guid: aa02a670638d42d4bb452ea0dbfb156e,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 233.23
       objectReference: {fileID: 0}
@@ -14358,21 +14343,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JamesVrm
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323115548861713249, guid: 925324ccc401fa140a06286196ef1a89,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323115548861713249, guid: 925324ccc401fa140a06286196ef1a89,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323115548861713249, guid: 925324ccc401fa140a06286196ef1a89,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2323115548861713249, guid: 925324ccc401fa140a06286196ef1a89,
         type: 3}

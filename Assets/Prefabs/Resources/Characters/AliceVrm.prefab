@@ -574,22 +574,22 @@ PrefabInstance:
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 223.4958
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 90.11901
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 177.09999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9951504
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
@@ -599,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.09836549
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: 50440203dfacf2f42b203c71f4eda9a4,
         type: 3}
@@ -717,6 +717,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1955138476653666454}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1834863837573776848 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -9055416251393219258, guid: 50440203dfacf2f42b203c71f4eda9a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955138476653666454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6347249406332127408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4843614395330177062, guid: 50440203dfacf2f42b203c71f4eda9a4,
@@ -770,6 +776,9 @@ MonoBehaviour:
   stepRayLower: {fileID: 3945240070608716631}
   stepHeight: 0.3
   stepSmooth: 0.2
+  head: {fileID: 1834863837573776848}
+  headRig: {fileID: 1213165781276682481}
+  spineRig: {fileID: 355058608466952646}
 --- !u!136 &2794826308782638074
 CapsuleCollider:
   m_ObjectHideFlags: 0
