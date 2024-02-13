@@ -31,5 +31,6 @@ public enum EnvEntityT
     Tree = 1001,
     Rock = 1002,
     SuitableForCrop = 1003,
-    Trunk = 1004
+    Trunk = 1004,
+    Grass = 1005
 }

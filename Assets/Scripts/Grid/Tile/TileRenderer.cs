@@ -65,6 +65,11 @@ namespace Amegakure.Verdania.GridSystem
             } 
         }
 
+        public void AddObject(GameObject prefab)
+        {
+            InstantiateObject(prefab);
+        }
+
         private void InstantiateObject(GameObject prefab)
         {
             if (prefab != null)

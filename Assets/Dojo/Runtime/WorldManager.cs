@@ -23,6 +23,7 @@ namespace Dojo
         public ToriiClient toriiClient;
         public ToriiWasmClient wasmClient;
         public event Action<WorldManager> OnEntityFeched;
+        private bool corroutineRunning = false;
 
         [SerializeField] WorldManagerData dojoConfig;
 
@@ -78,7 +79,11 @@ namespace Dojo
 
         private void SceneChange(Scene current, Scene next)
         {
-            StartCoroutine(nameof(NotifySubscribers));
+            if (!corroutineRunning)
+            {
+                StartCoroutine(nameof(NotifySubscribers));
+                corroutineRunning = true;
+            }
         }
 
         private IEnumerator NotifySubscribers()
@@ -86,6 +91,7 @@ namespace Dojo
             yield return new WaitUntil(() => OnEntityFeched != null);
 
             OnEntityFeched?.Invoke(this);
+            corroutineRunning = false;
             //Debug.Log("Fetched called!");
         }
 
