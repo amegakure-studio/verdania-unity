@@ -4,9 +4,8 @@ using Dojo.Starknet;
 
 public enum SkinType
 {
-    None,
-    Boy,
-    Girl
+    James = 1,
+    Alice = 2
 }
 
 public class PlayerSkin : ModelInstance

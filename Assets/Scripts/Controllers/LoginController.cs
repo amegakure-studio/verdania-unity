@@ -20,10 +20,10 @@ public class LoginController : MonoBehaviour
         loginBtn.clicked += LoginBtn_clicked;
 
         signUpBtn = root.Q<Button>("SignUpBtn");
-        signUpBtn.clicked += signUpBtn_clicked;
+        signUpBtn.clicked += SignUpBtn_clicked;
     }
 
-    private void signUpBtn_clicked()
+    private void SignUpBtn_clicked()
     {
         SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
         sceneLoader.LoadNextScene();
@@ -40,7 +40,7 @@ public class LoginController : MonoBehaviour
             if (session != null)
             {
                 SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
-                sceneLoader.LoadNextScene();
+                sceneLoader.LoadScene(2);
             }
             // TODO: Emmit an event to show some feedback to the user.
 
@@ -50,6 +50,6 @@ public class LoginController : MonoBehaviour
     private void OnDestroy()
     {
         loginBtn.clicked -= LoginBtn_clicked;
-        signUpBtn.clicked -= signUpBtn_clicked;
+        signUpBtn.clicked -= SignUpBtn_clicked;
     }
 }
