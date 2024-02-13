@@ -4,9 +4,9 @@ using System;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class SkinSystem : DojoSystem
+public class SkinSystem: MonoBehaviour
 {
-    public async Task<Boolean> CreatePlayer(string playerId, string playerName, SkinType gender)
+    public dojo.Call CreatePlayer(string playerId, string playerName, SkinType gender, string skinSystemAdress)
     {
         Debug.Log("created: " + playerId);
         var player_id = new FieldElement(playerId).Inner();
@@ -20,14 +20,9 @@ public class SkinSystem : DojoSystem
                         player_id, name, genderType
             },
             selector = "create",
-            to = systems.skinSystemAdress
+            to = skinSystemAdress
         };
 
-        try
-        {
-            await account.ExecuteRaw(new[] { call }); 
-            return true;
-        }
-        catch (Exception e) { Debug.LogError(e); return false;}
+        return call;
     }
 }

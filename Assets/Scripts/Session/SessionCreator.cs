@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class SessionCreator : MonoBehaviour
 {
     private FarmSystem farmSystem;
     private SkinSystem skinSystem;
+    private DojoSystem dojoSystem;
+    private bool playerCreated = false;
 
     private void Awake()
     {
         farmSystem = UnityUtils.FindOrCreateComponent<FarmSystem>();
         skinSystem = UnityUtils.FindOrCreateComponent<SkinSystem>();
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
     }
 
     // public async Task<Session> Create(string username, string password)
@@ -85,34 +89,24 @@ public class SessionCreator : MonoBehaviour
         return playerHash.ToString();
     }
 
-    public async void CreateNewPlayer(string username, string password, SkinType gender)
+    public void CreateNewPlayer(string username, string password, SkinType gender)
     {
         PlayerFarmState playerFarmState = FindPlayerFarmState(username, password);
         if (playerFarmState == null)
         {
             string playerId = GetPlayerHash(username, password);
-            
-            try
-            {
-                string usernameHex = StringToHex(username);
-                await skinSystem.CreatePlayer(playerId, usernameHex, gender);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("Error in skin system: " + e );
-                throw new Exception("Error in skin system");
-            }
+            string usernameHex = StringToHex(username);
 
-            await Task.Delay(1000);
+            dojo.Call skinCall = skinSystem.CreatePlayer(playerId, usernameHex, gender, dojoSystem.Systems.skinSystemAdress);
+            dojo.Call farmCall = farmSystem.CreateFarm(playerId, dojoSystem.Systems.farmSystemAdress);
 
             try
             {
-                await farmSystem.CreateFarm(playerId);
+                dojoSystem.ExecuteCalls(new[] { skinCall, farmCall});
             }
-            catch (Exception e)
+            catch (Exception e) 
             {
-                Debug.LogError("Error in farm system: " + e );
-                throw new Exception("Error in farm system");
+                Debug.LogException(e);
             }
         }
         else
@@ -120,6 +114,7 @@ public class SessionCreator : MonoBehaviour
             throw new Exception("The playe exist!!");
         }
     }
+
 
     private string StringToHex(string input)
     {
