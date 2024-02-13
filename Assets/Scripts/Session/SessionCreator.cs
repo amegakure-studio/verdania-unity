@@ -17,18 +17,48 @@ public class SessionCreator : MonoBehaviour
         skinSystem = UnityUtils.FindOrCreateComponent<SkinSystem>();
     }
 
-    public async Task<Session> Create(string username, string password)
-    {
-        PlayerFarmState playerFarmState = await FindOrCreatePlayer(username, password);
+    // public async Task<Session> Create(string username, string password)
+    // {
+    //     PlayerFarmState playerFarmState = await FindOrCreatePlayer(username, password);
         
-        Session session = UnityUtils.FindOrCreateComponent<Session>();
-        DontDestroyOnLoad(session.gameObject);
+    //     Session session = UnityUtils.FindOrCreateComponent<Session>();
+    //     DontDestroyOnLoad(session.gameObject);
         
-        session.PlayerId = playerFarmState.player_id;
-        session.MapId = playerFarmState.map_id;
-        session.FarmId = playerFarmState.farm_id;   
+    //     session.PlayerId = playerFarmState.player_id;
+    //     session.MapId = playerFarmState.map_id;
+    //     session.FarmId = playerFarmState.farm_id;   
 
-        return session;
+    //     return session;
+    // }
+
+    public Session GetSessionFromExistingPlayer(string username, string password)
+    {
+        PlayerFarmState playerFarmState = FindPlayerFarmState(username, password);
+        
+        if(playerFarmState != null)
+        {
+            Session session = UnityUtils.FindOrCreateComponent<Session>();
+            DontDestroyOnLoad(session.gameObject);
+            
+            session.PlayerId = playerFarmState.player_id;
+            session.MapId = playerFarmState.map_id;
+            session.FarmId = playerFarmState.farm_id;   
+
+            return session;
+        }
+
+        return null;
+    }
+    
+    private PlayerFarmState FindPlayerFarmState(string username, string password)
+    {
+        string playerId = GetPlayerHash(username, password);
+        PlayerFarmState playerFarmState = FindPlayer(playerId);
+        
+        if (playerFarmState != null)
+            return playerFarmState;
+
+        return null;
     }
 
     private async Task<PlayerFarmState> FindOrCreatePlayer(string username, string password)
