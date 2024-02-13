@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/SignUp.uss?fileID=7433441132597879392&amp;guid=de10107459b45874fa1b115be3c228e0&amp;type=3#SignUp" />
+    <ui:VisualElement name="Container" class="container">
+        <ui:VisualElement name="Left" style="flex-grow: 1; flex-shrink: 0;">
+            <ui:VisualElement name="Header" class="header">
+                <ui:Label tabindex="-1" text="Sign Up" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="title" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Content" class="content">
+                <ui:VisualElement name="FormGroup" style="flex-grow: 0; width: 50%;">
+                    <ui:VisualElement name="InputGroup" style="flex-grow: 1;">
+                        <ui:TextField picking-mode="Ignore" label="Username" />
+                        <ui:TextField picking-mode="Ignore" label="Password" />
+                    </ui:VisualElement>
+                    <ui:Button text="Sign Up" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SignupBtn" class="menuBtn" style="-unity-font-style: bold; background-image: url(&apos;project://database/Assets/Art/UI/Sprites/01/%D0%A1ommonElement/BtnDefault.png?fileID=21300000&amp;guid=c8e174f398c87144a8f7c3287d306fd1&amp;type=3#BtnDefault&apos;); -unity-background-scale-mode: stretch-to-fill; background-color: rgb(52, 55, 111); color: rgb(204, 204, 204); align-self: flex-end; padding-top: 20px; padding-bottom: 20px; padding-right: 40px; padding-left: 40px; font-size: 18px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Right" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

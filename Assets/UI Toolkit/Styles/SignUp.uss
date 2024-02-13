@@ -1,0 +1,36 @@
+.container {
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.header {
+    flex-grow: 0;
+    height: 25%;
+    flex-shrink: 0;
+}
+
+.title {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+    font-size: 75px;
+    -unity-font-style: normal;
+    background-image: url('project://database/Assets/Art/UI/Sprites/01/Elements/BlockInformation.png?fileID=21300000&guid=3078e142446cbb44087d6e62a0dd714b&type=3#BlockInformation');
+    -unity-background-scale-mode: scale-to-fit;
+    color: rgb(204, 204, 204);
+}
+
+.content {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#unity-text-input {
+    background-image: url('project://database/Assets/Art/UI/Sprites/03/JPG/MiniPanel06.jpg?fileID=21300000&guid=2f15e471d455d7242b4aa3a810b60b3d&type=3#MiniPanel06');
+}
+
+.unity-text-field__label {
+    -unity-font-style: bold;
+    font-size: 18px;
+}
