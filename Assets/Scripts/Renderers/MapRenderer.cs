@@ -62,13 +62,16 @@ public class MapRenderer : MonoBehaviour
     private void RenderPlayer(WorldManager worldManager)
     {
         PlayerState playerState = m_Finder.GetPlayerStateById(m_Session.PlayerId.Hex(), m_Session.FarmId, worldManager.Entities());
+        
         if (playerState != null)
         {
+            PlayerSkin playerSkin = m_Finder.GetPlayerSkinById(m_Session.PlayerId.Hex(), worldManager.Entities());
             Vector2Int tileCoordinate = new((int)playerState.x, (int)playerState.y);
+
             if (m_TileRenderers.ContainsKey(tileCoordinate))
             {
                 TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
-                string characterPath = folderResourcesConfig.charactersFolder + "AliceVrm";
+                string characterPath = folderResourcesConfig.charactersFolder + playerSkin.gender.ToString() + "Vrm";
                 
                 GameObject characterPrefab = Resources.Load<GameObject>(characterPath);
                 GameObject characterGo = Instantiate(characterPrefab);

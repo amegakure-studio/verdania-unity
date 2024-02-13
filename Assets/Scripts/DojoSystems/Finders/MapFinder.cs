@@ -124,4 +124,20 @@ public class MapFinder : MonoBehaviour
         return null;
     }
 
+    public PlayerSkin GetPlayerSkinById(string hexId, GameObject[] entities)
+    {
+        foreach (GameObject go in entities)
+        {
+            PlayerSkin playerSkin = go.GetComponent<PlayerSkin>();
+
+            if (playerSkin != null)
+            {
+                if (playerSkin.playerId.Hex().Equals(hexId))
+                    return playerSkin;
+            }
+        }
+
+        return null;
+    }
+
 }
