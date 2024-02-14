@@ -41,7 +41,7 @@
     min-width: auto;
 }
 
-#Inventory {
+#InventoryContainer {
     flex-basis: 50%;
     flex-shrink: 0;
     width: 80%;
@@ -55,4 +55,11 @@
     visibility: visible;
     display: flex;
     flex-shrink: 0;
+}
+
+#Inventory {
+    flex-basis: 50%;
+    flex-shrink: 0;
+    width: 80%;
+    align-items: center;
 }

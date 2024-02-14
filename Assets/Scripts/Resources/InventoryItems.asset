@@ -12,4 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161402410190e864489fc510f02f9ca7, type: 3}
   m_Name: InventoryItems
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - itemType: 2
+    itemName: Hoe
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 3
+    itemName: Watering Can
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1
+    itemName: Pickaxe
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1000
+    itemName: Pumpkin Seeds
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1001
+    itemName: Onion Seeds
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1002
+    itemName: Carrot Seeds
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1003
+    itemName: Corn Seeds
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}
+  - itemType: 1004
+    itemName: Mush Seeds
+    itemIcon: {fileID: 21300052, guid: bece165af26307e47bb63394ab1e38b8, type: 3}
+    itemPrefab: {fileID: 0}

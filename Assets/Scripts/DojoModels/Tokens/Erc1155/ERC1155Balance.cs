@@ -1,6 +1,8 @@
 using Dojo;
 using Dojo.Starknet;
+using Dojo.Torii;
 using System.Numerics;
+using UnityEngine;
 
 public class ERC1155Balance : ModelInstance
 {
@@ -15,4 +17,10 @@ public class ERC1155Balance : ModelInstance
 
     [ModelField("amount")]
     public BigInteger amount;
+
+    //public override void Initialize(Model model)
+    //{
+    //    base.Initialize(model);
+    //    Debug.Log("Item_id: " + id + "\n" + "Amm: " + amount.ToString());
+    //}
 }

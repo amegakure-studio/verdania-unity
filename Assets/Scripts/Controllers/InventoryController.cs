@@ -49,7 +49,7 @@ public class InventoryController : MonoBehaviour
 
         foreach (VisualElement slotVe in slotsVe) 
         {
-            if (slotItemMap[slotVe].id.Equals(item.id))
+            if (slotItemMap[slotVe] != null && slotItemMap[slotVe].id.Equals(item.id))
             {
                 slotVe.Q<Label>("Quantity").text = item.amount.ToString();
 
@@ -74,6 +74,8 @@ public class InventoryController : MonoBehaviour
                 slotVe.Q<VisualElement>("Item").style.backgroundImage = new StyleBackground(GetItemSprite(itemType));
 
                 slotItemMap[slotVe] = item;
+                
+                return;
             }
         }
     }
@@ -90,5 +92,4 @@ public class InventoryController : MonoBehaviour
     {
         m_WorldManager.OnEntityFeched -= Init;
     }
-
 }
