@@ -12,14 +12,14 @@ using UnityEngine.Analytics;
 public class SessionCreator : MonoBehaviour
 {
     private FarmSystem farmSystem;
-    private SkinSystem skinSystem;
+    private PlayerSystem skinSystem;
     private DojoSystem dojoSystem;
     private bool playerCreated = false;
 
     private void Awake()
     {
         farmSystem = UnityUtils.FindOrCreateComponent<FarmSystem>();
-        skinSystem = UnityUtils.FindOrCreateComponent<SkinSystem>();
+        skinSystem = UnityUtils.FindOrCreateComponent<PlayerSystem>();
         dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
     }
 
@@ -97,7 +97,7 @@ public class SessionCreator : MonoBehaviour
             string playerId = GetPlayerHash(username, password);
             string usernameHex = StringToHex(username);
 
-            dojo.Call skinCall = skinSystem.CreatePlayer(playerId, usernameHex, gender, dojoSystem.Systems.skinSystemAdress);
+            dojo.Call skinCall = skinSystem.CreatePlayer(playerId, usernameHex, gender, dojoSystem.Systems.playerSystemAdress);
             dojo.Call farmCall = farmSystem.CreateFarm(playerId, dojoSystem.Systems.farmSystemAdress);
 
             try
