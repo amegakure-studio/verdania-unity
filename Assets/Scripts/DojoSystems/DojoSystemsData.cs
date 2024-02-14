@@ -8,6 +8,6 @@ public class DojoSystemsData : ScriptableObject
 {
     public string mapSystemAdress;
     public string farmSystemAdress;
-    public string skinSystemAdress;
+    public string playerSystemAdress;
 }
 

@@ -1,0 +1,56 @@
+.container {
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.header {
+    flex-grow: 0;
+    height: 25%;
+    flex-shrink: 0;
+}
+
+.title {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+    font-size: 75px;
+    -unity-font-style: normal;
+    background-image: url('project://database/Assets/Art/UI/Sprites/01/%D0%A1ommonElement/BqPanelBotton.png?fileID=21300000&guid=00cf010019afb064c847611881465f85&type=3#BqPanelBotton');
+    -unity-background-scale-mode: scale-to-fit;
+    color: rgb(213, 213, 213);
+    background-color: rgba(192, 71, 9, 0);
+    -unity-background-image-tint-color: rgba(45, 30, 15, 0.77);
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgba(55, 55, 55, 0.8);
+}
+
+.content {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#unity-text-input {
+    background-image: url('project://database/Assets/Art/UI/Sprites/03/JPG/MiniPanel06.jpg?fileID=21300000&guid=2f15e471d455d7242b4aa3a810b60b3d&type=3#MiniPanel06');
+    background-color: rgba(66, 56, 47, 0.51);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.05);
+}
+
+.unity-text-field__label {
+    -unity-font-style: bold;
+    font-size: 18px;
+}
+
+.unity-base-field__label {
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.unity-base-field {
+    color: rgb(72, 58, 43);
+}
+
+.unity-base-field__input {
+    background-color: rgba(66, 56, 47, 0.51);
+    color: rgb(239, 239, 239);
+}

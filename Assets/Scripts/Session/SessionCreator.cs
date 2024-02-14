@@ -1,54 +1,71 @@
 using Dojo;
 using Dojo.Starknet;
 using dojo_bindings;
+using System;
 using System.Collections;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class SessionCreator : MonoBehaviour
 {
     private FarmSystem farmSystem;
-    private SkinSystem skinSystem;
+    private PlayerSystem skinSystem;
+    private DojoSystem dojoSystem;
+    private bool playerCreated = false;
 
     private void Awake()
     {
         farmSystem = UnityUtils.FindOrCreateComponent<FarmSystem>();
-        skinSystem = UnityUtils.FindOrCreateComponent<SkinSystem>();
+        skinSystem = UnityUtils.FindOrCreateComponent<PlayerSystem>();
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
     }
 
-    public async Task<Session> Create(string username, string password)
+    // public async Task<Session> Create(string username, string password)
+    // {
+    //     PlayerFarmState playerFarmState = await FindOrCreatePlayer(username, password);
+        
+    //     Session session = UnityUtils.FindOrCreateComponent<Session>();
+    //     DontDestroyOnLoad(session.gameObject);
+        
+    //     session.PlayerId = playerFarmState.player_id;
+    //     session.MapId = playerFarmState.map_id;
+    //     session.FarmId = playerFarmState.farm_id;   
+
+    //     return session;
+    // }
+
+    public Session GetSessionFromExistingPlayer(string username, string password)
     {
-        PlayerFarmState playerFarmState = await FindOrCreatePlayer(username, password);
+        PlayerFarmState playerFarmState = FindPlayerFarmState(username, password);
         
-        Session session = UnityUtils.FindOrCreateComponent<Session>();
-        DontDestroyOnLoad(session.gameObject);
-        
-        session.PlayerId = playerFarmState.player_id;
-        session.MapId = playerFarmState.map_id;
-        session.FarmId = playerFarmState.farm_id;   
+        if(playerFarmState != null)
+        {
+            Session session = UnityUtils.FindOrCreateComponent<Session>();
+            DontDestroyOnLoad(session.gameObject);
+            
+            session.PlayerId = playerFarmState.player_id;
+            session.MapId = playerFarmState.map_id;
+            session.FarmId = playerFarmState.farm_id;   
 
-        return session;
+            return session;
+        }
+
+        return null;
     }
-
-    private async Task<PlayerFarmState> FindOrCreatePlayer(string username, string password)
+    
+    private PlayerFarmState FindPlayerFarmState(string username, string password)
     {
         string playerId = GetPlayerHash(username, password);
         PlayerFarmState playerFarmState = FindPlayer(playerId);
+        
+        if (playerFarmState != null)
+            return playerFarmState;
 
-        if (playerFarmState == null)
-        {
-            farmSystem.CreateFarm(playerId);
-            
-            while (playerFarmState == null)
-            {
-                playerFarmState = FindPlayer(playerId);
-                await Task.Delay(1000);
-            }
-        }
-        return playerFarmState;
+        return null;
     }
-
 
     private PlayerFarmState FindPlayer(string playerId)
     {
@@ -70,5 +87,48 @@ public class SessionCreator : MonoBehaviour
         playerHash.Append(password);
 
         return playerHash.ToString();
+    }
+
+    public void CreateNewPlayer(string username, string password, SkinType gender)
+    {
+        PlayerFarmState playerFarmState = FindPlayerFarmState(username, password);
+        if (playerFarmState == null)
+        {
+            string playerId = GetPlayerHash(username, password);
+            string usernameHex = StringToHex(username);
+
+            dojo.Call skinCall = skinSystem.CreatePlayer(playerId, usernameHex, gender, dojoSystem.Systems.playerSystemAdress);
+            dojo.Call farmCall = farmSystem.CreateFarm(playerId, dojoSystem.Systems.farmSystemAdress);
+
+            try
+            {
+                dojoSystem.ExecuteCalls(new[] { skinCall, farmCall});
+            }
+            catch (Exception e) 
+            {
+                Debug.LogException(e);
+            }
+        }
+        else
+        {
+            throw new Exception("The playe exist!!");
+        }
+    }
+
+
+    private string StringToHex(string input)
+    {
+        // Convert the string to a byte array
+        byte[] bytes = Encoding.UTF8.GetBytes(input);
+        
+        // Convert each byte to its hexadecimal representation
+        StringBuilder hexBuilder = new StringBuilder(bytes.Length * 2);
+        foreach (byte b in bytes)
+        {
+            hexBuilder.AppendFormat("{0:x2}", b); // "x2" formats the byte as a two-digit hexadecimal number
+        }
+        
+        // Return the hexadecimal string
+        return hexBuilder.ToString();
     }
 }

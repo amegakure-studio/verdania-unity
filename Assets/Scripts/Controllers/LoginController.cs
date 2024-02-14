@@ -7,6 +7,7 @@ public class LoginController : MonoBehaviour
     private TextField usernameTxt;
     private TextField passwordTxt;
     private Button loginBtn;
+    private Button signUpBtn;
 
     private void Start()
     {
@@ -17,24 +18,38 @@ public class LoginController : MonoBehaviour
 
         loginBtn = root.Q<Button>("LoginBtn");
         loginBtn.clicked += LoginBtn_clicked;
+
+        signUpBtn = root.Q<Button>("SignUpBtn");
+        signUpBtn.clicked += SignUpBtn_clicked;
     }
 
-    private async void LoginBtn_clicked()
+    private void SignUpBtn_clicked()
+    {
+        SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
+        sceneLoader.LoadNextScene();
+    }
+
+    private void LoginBtn_clicked()
     {
         try
         {
             SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();    
-            await sessionCreator.Create(usernameTxt.text, passwordTxt.text);
+            Session session = sessionCreator.GetSessionFromExistingPlayer(usernameTxt.text, passwordTxt.text);
 
-            SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
-            sceneLoader.LoadNextScene();
+            
+            if (session != null)
+            {
+                SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
+                sceneLoader.LoadScene(2);
+            }
+            // TODO: Emmit an event to show some feedback to the user.
 
-        } catch (Exception e) { Debug.Log("Couldn't login. " + e); }
-        
+        } catch (Exception e) { Debug.Log("Couldn't login. " + e); }        
     }
 
     private void OnDestroy()
     {
         loginBtn.clicked -= LoginBtn_clicked;
+        signUpBtn.clicked -= SignUpBtn_clicked;
     }
 }

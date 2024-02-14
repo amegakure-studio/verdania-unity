@@ -3,10 +3,11 @@ using UnityEngine;
 using Dojo;
 using Dojo.Starknet;
 using dojo_bindings;
+using System.Threading.Tasks;
 
-public class FarmSystem : DojoSystem
+public class FarmSystem: MonoBehaviour
 {
-    public async void CreateFarm(string playerId)
+    public dojo.Call CreateFarm(string playerId, string farmSystemAdress)
     {
         Debug.Log("created: " + playerId);
         var player_id = new FieldElement(playerId).Inner();
@@ -18,10 +19,9 @@ public class FarmSystem : DojoSystem
                         player_id
             },
             selector = "create_farm",
-            to = systems.farmSystemAdress
+            to = farmSystemAdress
         };
-	
-	    try { await account.ExecuteRaw(new[] { call }); }
-        catch (Exception e) { Debug.LogError(e); }
+
+        return call;
     }
 }
