@@ -127,10 +127,11 @@ public class MapRenderer : MonoBehaviour
     private void RenderObjects(WorldManager worldManager)
     {
         GameObject[] entities = worldManager.Entities();
-        List<TileState> tilesState = m_Finder.GetTileStatesByFarmID(m_Session.FarmId, entities);
+        List<TileState> tileStates = m_Finder.GetTileStatesByFarmID(m_Session.FarmId, entities);
         
-        foreach(TileState tileState in tilesState)
+        foreach(TileState tileState in tileStates)
         {
+            tileState.TileStateChanged += (ts) => RenderObject(entities, ts);
             RenderObject(entities, tileState);
         }
 
