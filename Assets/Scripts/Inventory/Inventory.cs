@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using static UniVRM10.VRMVersion;
 
 public class Inventory : MonoBehaviour
 {
@@ -15,6 +14,18 @@ public class Inventory : MonoBehaviour
     private WorldManager m_WorldManager;
     private PlayerSystem playerSystem;
     private DojoSystem dojoSystem;
+    private Character character;
+    private GameObject equipedItemGO;
+
+    private void OnEnable()
+    {
+        EventManager.Instance.Subscribe(GameEvent.PLAYER_CREATED, HandlePlayerSpawn);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.Unsubscribe(GameEvent.PLAYER_CREATED, HandlePlayerSpawn);
+    }
 
     private void Awake()
     {
@@ -25,7 +36,24 @@ public class Inventory : MonoBehaviour
 
         playerSystem = UnityUtils.FindOrCreateComponent<PlayerSystem>();
         dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+    }
 
+    private void HandlePlayerSpawn(Dictionary<string, object> context)
+    {
+        try
+        {
+            Character contextCharacter = (Character)context["Player"];
+            if (contextCharacter != null &&
+                contextCharacter.DojoId.Equals(session.PlayerId.Hex()))
+            {
+                character = contextCharacter;
+                SetItem(GetEquippedItem());
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     public void Equip(UInt64 itemId)
@@ -35,6 +63,7 @@ public class Inventory : MonoBehaviour
         try
         {
             dojoSystem.ExecuteCalls(new[] { equipItemCall });
+            SetItem((ItemType)itemId);
         }
         catch (Exception e)
         {
@@ -43,11 +72,29 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private void SetItem(ItemType itemId)
+    {
+            ItemGoBinding[] itemGoBindings = character.ItemsGo;
+
+            foreach (ItemGoBinding binding in itemGoBindings)
+            {
+                if (binding.itemType == itemId)
+                {
+                    if (equipedItemGO != null)
+                        equipedItemGO.SetActive(false);
+
+                    equipedItemGO = binding.itemGo;
+                    equipedItemGO.SetActive(true);
+                    return;
+                }
+            }
+    }
+
     public ItemType GetEquippedItem()
     {
         PlayerState playerState = finder.GetPlayerStateById(session.PlayerId.Hex(), m_WorldManager.Entities());
 
-        return (ItemType) playerState.equipmentItemId;
+        return (ItemType)playerState.equipmentItemId;
     }
 
     public List<ERC1155Balance> GetItems()

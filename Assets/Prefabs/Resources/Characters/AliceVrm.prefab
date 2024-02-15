@@ -458,6 +458,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 981895868388717247}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3153500495947259058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2766088583055928845, guid: 0ddb123373c35374ab921a5e71f95277,
+    type: 3}
+  m_PrefabInstance: {fileID: 981895868388717247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1955138476653666454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,6 +785,21 @@ MonoBehaviour:
   head: {fileID: 1834863837573776848}
   headRig: {fileID: 1213165781276682481}
   spineRig: {fileID: 355058608466952646}
+  itemsGo:
+  - itemType: 2
+    itemGo: {fileID: 6687753268411636836}
+  - itemType: 3
+    itemGo: {fileID: 1534558624530470370}
+  - itemType: 1000
+    itemGo: {fileID: 3153500495947259058}
+  - itemType: 1001
+    itemGo: {fileID: 3153500495947259058}
+  - itemType: 1002
+    itemGo: {fileID: 3153500495947259058}
+  - itemType: 1003
+    itemGo: {fileID: 3153500495947259058}
+  - itemType: 1004
+    itemGo: {fileID: 3153500495947259058}
 --- !u!136 &2794826308782638074
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -913,6 +934,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3407730961005376404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6687753268411636836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8324091832098189296, guid: 7354ddc4eeb7196499256307f804a36d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3407730961005376404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6525313133704851713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -986,6 +1013,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05380b751fb50d744987d8bc338b5fdb, type: 3}
+--- !u!1 &1534558624530470370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5748081075956851939, guid: 05380b751fb50d744987d8bc338b5fdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6525313133704851713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2161737016068722520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4940055046512311897, guid: 05380b751fb50d744987d8bc338b5fdb,

@@ -452,6 +452,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ddb123373c35374ab921a5e71f95277, type: 3}
+--- !u!1 &531209488997270220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2766088583055928845, guid: 0ddb123373c35374ab921a5e71f95277,
+    type: 3}
+  m_PrefabInstance: {fileID: 2394827438978772161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &870580781243668598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3254077529358578871, guid: 0ddb123373c35374ab921a5e71f95277,
@@ -546,6 +552,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05380b751fb50d744987d8bc338b5fdb, type: 3}
+--- !u!1 &57643079269401910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5748081075956851939, guid: 05380b751fb50d744987d8bc338b5fdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5695227633052246485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &830662066685386636 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4940055046512311897, guid: 05380b751fb50d744987d8bc338b5fdb,
@@ -640,6 +652,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7354ddc4eeb7196499256307f804a36d, type: 3}
+--- !u!1 &1584957534738474947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8324091832098189296, guid: 7354ddc4eeb7196499256307f804a36d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7384772068259858483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2212735086294089081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8705121386538022218, guid: 7354ddc4eeb7196499256307f804a36d,
@@ -922,6 +940,21 @@ MonoBehaviour:
   head: {fileID: 7345746696253825623}
   headRig: {fileID: 7272698225655188361}
   spineRig: {fileID: 276266117621237459}
+  itemsGo:
+  - itemType: 2
+    itemGo: {fileID: 1584957534738474947}
+  - itemType: 3
+    itemGo: {fileID: 57643079269401910}
+  - itemType: 1000
+    itemGo: {fileID: 531209488997270220}
+  - itemType: 1001
+    itemGo: {fileID: 531209488997270220}
+  - itemType: 1002
+    itemGo: {fileID: 531209488997270220}
+  - itemType: 1003
+    itemGo: {fileID: 531209488997270220}
+  - itemType: 1004
+    itemGo: {fileID: 531209488997270220}
 --- !u!136 &7921727945947339802
 CapsuleCollider:
   m_ObjectHideFlags: 0

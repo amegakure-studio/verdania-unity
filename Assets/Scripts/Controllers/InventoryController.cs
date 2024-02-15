@@ -33,7 +33,7 @@ public class InventoryController : MonoBehaviour
 
         }
         catch (Exception e) { Debug.LogError(e); }
-    }    
+    }
 
     void Awake()
     {
@@ -71,12 +71,12 @@ public class InventoryController : MonoBehaviour
 
     private void Init(WorldManager obj)
     {
-        if(slotItemMap == null)
+        if (slotItemMap == null)
             InitSoltItemsMap();
 
         List<ERC1155Balance> items = inventory.GetItems();
 
-        items.ToList().ForEach(item => 
+        items.ToList().ForEach(item =>
         {
             UpdateSlot(item);
             item.balanceChanged += UpdateSlot;
@@ -91,7 +91,8 @@ public class InventoryController : MonoBehaviour
         foreach(VisualElement slotVe in slotItemMap.Keys)
         {
             ERC1155Balance item = slotItemMap[slotVe];
-            Debug.Log("Null? : " + item == null) ;
+            Debug.Log("selectedItemType : " + selectedItemType);
+            Debug.Log("Null? : " + item == null + " ID: " + item.id);
 
             ItemType itemType = (ItemType)Int32.Parse(item.id.ToString());
 
@@ -112,7 +113,7 @@ public class InventoryController : MonoBehaviour
     {
         List<VisualElement> slotsVe = slotItemMap.Keys.ToList();
 
-        foreach (VisualElement slotVe in slotsVe) 
+        foreach(VisualElement slotVe in slotsVe)
         {
             if (slotItemMap[slotVe] != null && slotItemMap[slotVe].id.Equals(item.id))
             {
@@ -139,7 +140,7 @@ public class InventoryController : MonoBehaviour
                 slotVe.Q<VisualElement>("Item").style.backgroundImage = new StyleBackground(GetItemSprite(itemType));
 
                 slotItemMap[slotVe] = item;
-                
+
                 return;
             }
         }
@@ -168,12 +169,12 @@ public class InventoryController : MonoBehaviour
                                         {
                                             try
                                             {
-                                                if(keyItemMap.Keys.ToList().Contains(keyCode))
+                                                if (keyItemMap.Keys.ToList().Contains(keyCode))
                                                 {
                                                     VisualElement slotve = keyItemMap[keyCode];
                                                     ERC1155Balance item = slotItemMap[slotve];
 
-                                                    if(item != null)
+                                                    if (item != null)
                                                     {
                                                         ItemType itemtype = (ItemType)Int32.Parse(item.id.ToString());
 
