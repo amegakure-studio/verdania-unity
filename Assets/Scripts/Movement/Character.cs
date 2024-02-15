@@ -1,9 +1,20 @@
+using System;
 using System.Collections.Generic;
 using Amegakure.Verdania.GridSystem;
 using UnityEngine;
 
+[Serializable]
+public struct ItemGoBinding
+{
+    public ItemType itemType;
+    public GameObject itemGo; 
+}
+
 public class Character : MonoBehaviour
 {
+    [Header("Dojo")]
+    private string dojoId;
+
     [Header("Movement variables")]
     [SerializeField] TileRenderer initTile;
     private const float speed = 3f;
@@ -24,6 +35,8 @@ public class Character : MonoBehaviour
     [SerializeField] GameObject headRig;
     [SerializeField] GameObject spineRig;
 
+    [Header("Inventory GO")]
+    [SerializeField] ItemGoBinding[] itemsGo;
 
     public List<TileRenderer> PathVectorList
     {
@@ -43,6 +56,8 @@ public class Character : MonoBehaviour
     public Transform Head { get => head; set => head = value; }
     public GameObject HeadRig { get => headRig; set => headRig = value; }
     public GameObject SpineRig { get => spineRig; set => spineRig = value; }
+    public string DojoId { get => dojoId; set => dojoId = value; }
+    public ItemGoBinding[] ItemsGo { get => itemsGo; set => itemsGo = value; }
 
     private void Start()
     {
@@ -82,7 +97,7 @@ public class Character : MonoBehaviour
 
         float distanceBefore = Vector3.Distance(transform.position, destination);
         transform.position = transform.position + moveDir * speed * Time.deltaTime;
-                
+
         Vector3 vectorRotation = transform.position.DirectionTo(destination).Flat();
 
         if (vectorRotation != Vector3.zero)

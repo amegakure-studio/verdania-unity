@@ -84,6 +84,7 @@ public class MapRenderer : MonoBehaviour
                 {
                     Debug.Log("set coordinate");
                     character.CurrentTile = tileRenderer;
+                    character.DojoId = m_Session.PlayerId.Hex();
                 }
 
                 PlayerController controller = characterGo.AddComponent<PlayerController>();

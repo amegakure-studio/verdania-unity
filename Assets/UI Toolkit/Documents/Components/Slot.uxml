@@ -3,6 +3,6 @@
     <ui:VisualElement name="Slot" class="slot">
         <ui:VisualElement name="Item" style="flex-grow: 1; background-image: none;" />
         <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" class="item_id" />
-        <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quantity" class="quantity_id" />
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quantity" class="quantity_id" />
     </ui:VisualElement>
 </ui:UXML>

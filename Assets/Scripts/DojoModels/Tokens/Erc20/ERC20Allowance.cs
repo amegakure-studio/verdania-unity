@@ -1,5 +1,6 @@
 using Dojo;
 using Dojo.Starknet;
+using System;
 
 public class ERC20Allowance : ModelInstance
 {
@@ -13,5 +14,5 @@ public class ERC20Allowance : ModelInstance
     public FieldElement spender;
 
     [ModelField("amount")]
-    public FieldElement amount;
+    public UInt64 amount;
 }

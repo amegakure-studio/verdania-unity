@@ -18,5 +18,5 @@ public class MarketplaceMeta : ModelInstance
     public UInt64 spawnTime;
 
     [ModelField("item_list_len")]
-    public BigInteger itemListLength;
+    public UInt64 itemListLength;
 }

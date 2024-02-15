@@ -11,7 +11,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Middle" class="middle_hud" />
         <ui:VisualElement name="Footer" class="footer_hud">
-            <ui:Instance template="Inventory" name="Inventory" />
+            <ui:Instance template="Inventory" name="InventoryContainer" />
         </ui:VisualElement>
         <ui:VisualElement name="MenuArea" style="flex-grow: 1;">
             <ui:Instance template="MenuStore" name="MenuStore" style="width: 100%; height: 100%;" />
