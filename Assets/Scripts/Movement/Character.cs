@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Amegakure.Verdania.GridSystem;
+using Dojo;
 using UnityEngine;
 
 [Serializable]
@@ -16,7 +17,6 @@ public class Character : MonoBehaviour
     private string dojoId;
 
     [Header("Movement variables")]
-    [SerializeField] TileRenderer initTile;
     private const float speed = 3f;
     private List<TileRenderer> pathVectorList;
     private int currentPathIndex;
@@ -37,6 +37,10 @@ public class Character : MonoBehaviour
 
     [Header("Inventory GO")]
     [SerializeField] ItemGoBinding[] itemsGo;
+
+    private PlayerFinder playerFinder;
+    private Session session;
+    private WorldManager worldManager;
 
     public List<TileRenderer> PathVectorList
     {
@@ -59,10 +63,11 @@ public class Character : MonoBehaviour
     public string DojoId { get => dojoId; set => dojoId = value; }
     public ItemGoBinding[] ItemsGo { get => itemsGo; set => itemsGo = value; }
 
-    private void Start()
+    private void Awake()
     {
-        if (initTile != null)
-            CurrentTile = initTile;
+        //playerFinder = UnityUtils.FindOrCreateComponent<PlayerFinder>();
+        //session = GameObject.FindObjectOfType<Session>();
+        //worldManager = GameObject.FindObjectOfType<WorldManager>();
     }
 
     public void HandleMovement()

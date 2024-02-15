@@ -1,18 +1,38 @@
 using System;
 using System.Collections.Generic;
 using Amegakure.Verdania.GridSystem;
+using Dojo;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PathFinder pathFinder;
     private Character character;
+    private MapRenderer map;
+    private WorldManager worldManager;
 
     public Character Character { get => character; set => character = value; }
+
+    private void OnEnable()
+    {
+        worldManager = GameObject.FindObjectOfType<WorldManager>();
+        //worldManager.OnEntityFeched += WorldManager_OnEntityFeched;
+    }
+
+    private void OnDisable()
+    {
+        //worldManager.OnEntityFeched -= WorldManager_OnEntityFeched;
+    }
+
+    private void Start()
+    {
+        GetPlayerAdjacentTiles().ForEach(tile => map.HighlightTile(tile));
+    }
 
     private void Awake()
     {
         pathFinder = GameObject.FindObjectOfType<PathFinder>();
+        map = GameObject.FindObjectOfType<MapRenderer>();
     }
 
     void Update()
@@ -64,5 +84,32 @@ public class PlayerController : MonoBehaviour
             
             Character.PathVectorList = tiles;
         }
+    }
+
+    private List<TileRenderer> GetPlayerAdjacentTiles()
+    {
+        List<TileRenderer> tiles = new();
+
+        Vector2Int originCoordinate = character.CurrentTile.coordinate;
+        List<Vector2Int> directions = new() 
+        { 
+            new Vector2Int(0,1),
+            new Vector2Int(0,-1),
+            new Vector2Int(1,0),
+            new Vector2Int(-1,0)
+        };
+
+        foreach (Vector2Int direction in directions) 
+        { 
+            Vector2Int adjacentCoordinate = originCoordinate + direction;
+            TileRenderer adjacentTile = map.GetTile(adjacentCoordinate);
+
+            if (adjacentTile)
+                tiles.Add(adjacentTile);
+        }
+
+        tiles.Add(map.GetTile(originCoordinate));
+
+        return tiles;
     }
 }

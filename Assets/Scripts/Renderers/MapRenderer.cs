@@ -16,6 +16,10 @@ public class MapRenderer : MonoBehaviour
     private MapFinder m_Finder;
     private Dictionary<Vector2Int, TileRenderer> m_TileRenderers;
 
+    [Header("Tiles")]
+    [SerializeField] Material defaultMaterial;
+    [SerializeField] Material highlightMaterial;
+
     private void OnEnable()
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
@@ -49,6 +53,19 @@ public class MapRenderer : MonoBehaviour
     void OnDisable()
     {
         m_WorldManager.OnEntityFeched -= Render;
+    }
+
+    public TileRenderer GetTile(Vector2Int coordinate)
+    {
+        if (m_TileRenderers.ContainsKey(coordinate))
+            return m_TileRenderers[coordinate];
+
+        else return null;
+    }
+
+    public void HighlightTile(TileRenderer tile)
+    {
+        tile.GetComponentInChildren<Renderer>().material = highlightMaterial;
     }
 
     private void Render(WorldManager worldManager)
