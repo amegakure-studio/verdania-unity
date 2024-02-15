@@ -14,20 +14,20 @@ public class ERC1155Balance : ModelInstance
     public FieldElement account;
 
     [ModelField("id")]
-    public BigInteger id;
+    public UInt64 id;
 
     [ModelField("amount")]
-    public BigInteger amount;
+    public UInt64 amount;
 
     public event Action<ERC1155Balance> balanceChanged;
 
     public override void OnUpdate(Model model)
     {
-        BigInteger oldAmount = amount;
+        UInt64 oldAmount = amount;
 
         base.OnUpdate(model);
 
-        if (!oldAmount.Equals(amount)) 
+        if (oldAmount != amount) 
         {
             balanceChanged?.Invoke(this);
         }

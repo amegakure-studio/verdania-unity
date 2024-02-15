@@ -21,5 +21,5 @@ public class PlayerState : ModelInstance
     public UInt64 equipmentItemId;
 
     [ModelField("tokens")]
-    public BigInteger tokens;
+    public UInt64 tokens;
 }

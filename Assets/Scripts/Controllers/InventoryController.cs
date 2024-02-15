@@ -94,7 +94,7 @@ public class InventoryController : MonoBehaviour
             Debug.Log("selectedItemType : " + selectedItemType);
             Debug.Log("Null? : " + item == null + " ID: " + item.id);
 
-            ItemType itemType = (ItemType)Int32.Parse(item.id.ToString());
+            ItemType itemType = (ItemType)item.id;
 
             if (selectedItemType == itemType)
             {
@@ -115,11 +115,11 @@ public class InventoryController : MonoBehaviour
 
         foreach(VisualElement slotVe in slotsVe)
         {
-            if (slotItemMap[slotVe] != null && slotItemMap[slotVe].id.Equals(item.id))
+            if (slotItemMap[slotVe] != null && slotItemMap[slotVe].id == item.id)
             {
                 slotVe.Q<Label>("Quantity").text = item.amount.ToString();
 
-                if (item.amount.IsZero)
+                if (item.amount == 0)
                 {
                     slotVe.Q<VisualElement>("Item").style.backgroundImage = null;
                     slotVe.Q<Label>("Quantity").text = "";
@@ -134,7 +134,7 @@ public class InventoryController : MonoBehaviour
         {
             if (slotItemMap[slotVe] == null)
             {
-                ItemType itemType = (ItemType)Int32.Parse(item.id.ToString());
+                ItemType itemType = (ItemType)item.id;
 
                 slotVe.Q<Label>("Quantity").text = item.amount.ToString();
                 slotVe.Q<VisualElement>("Item").style.backgroundImage = new StyleBackground(GetItemSprite(itemType));
@@ -176,11 +176,11 @@ public class InventoryController : MonoBehaviour
 
                                                     if (item != null)
                                                     {
-                                                        ItemType itemtype = (ItemType)Int32.Parse(item.id.ToString());
+                                                        ItemType itemType = (ItemType)item.id;
 
-                                                        inventory.Equip((ulong)item.id);
-                                                        Debug.Log("item type: " + itemtype + " id: " + (ulong)item.id);
-                                                        SelectSlot(itemtype);
+                                                        inventory.Equip(item.id);
+                                                        Debug.Log("item type: " + itemType + " id: " + item.id);
+                                                        SelectSlot(itemType);
                                                     }
                                                 }
                                             }

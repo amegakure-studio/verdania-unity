@@ -1,6 +1,6 @@
 using Dojo;
 using Dojo.Starknet;
-using System.Numerics;
+using System;
 
 public class ERC20Meta : ModelInstance
 {
@@ -14,7 +14,7 @@ public class ERC20Meta : ModelInstance
     public FieldElement symbol;
 
     [ModelField("total_supply")]
-    public BigInteger total_supply;
+    public UInt64 total_supply;
     
     [ModelField("owner")]
     public FieldElement owner;
