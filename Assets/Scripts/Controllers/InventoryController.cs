@@ -43,7 +43,8 @@ public class InventoryController : MonoBehaviour
         VisualElement root = GameObject.FindObjectOfType<UIDocument>().rootVisualElement;
 
         List<VisualElement> slotsVe = root.Q<VisualElement>("Inventory").Children().ToList();
-        slotsVe.ForEach(slotVe => slotVe.Q<Label>("Id").text = slotsVe.IndexOf(slotVe).ToString());
+        slotsVe.ForEach(slotVe => slotVe.Q<Label>("Id").text = (slotsVe.IndexOf(slotVe)+1).ToString());
+        slotsVe[slotsVe.Count-1].Q<Label>("Id").text = "0";
 
         slotItemMap = new();
         slotsVe.ForEach((slotVe) => slotItemMap.Add(slotVe, null));
