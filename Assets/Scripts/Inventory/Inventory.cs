@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using static UniVRM10.VRMVersion;
 
 public class Inventory : MonoBehaviour
 {
@@ -40,8 +41,13 @@ public class Inventory : MonoBehaviour
             Debug.LogException(e);
             throw new Exception("Couldn't equip the item: " + itemId);
         }
+    }
 
+    public ItemType GetEquippedItem()
+    {
+        PlayerState playerState = finder.GetPlayerStateById(session.PlayerId.Hex(), m_WorldManager.Entities());
 
+        return (ItemType) playerState.equipmentItemId;
     }
 
     public List<ERC1155Balance> GetItems()

@@ -15,6 +15,7 @@ public class InventoryController : MonoBehaviour
 
     private Dictionary<VisualElement, ERC1155Balance> slotItemMap;
     private Dictionary<KeyCode, VisualElement> keyItemMap;
+    private VisualElement selectedSlot;
 
     private void OnEnable()
     {
@@ -36,14 +37,33 @@ public class InventoryController : MonoBehaviour
 
     void Awake()
     {
+        keyItemMap = new();
+
         itemsData = Resources.Load<InventoryItems>("InventoryItems");
         inventory = UnityUtils.FindOrCreateComponent<Inventory>();
-        
+        InitSoltItemsMap();
+    }
+
+    private void InitSoltItemsMap()
+    {
         VisualElement root = GameObject.FindObjectOfType<UIDocument>().rootVisualElement;
 
         List<VisualElement> slotsVe = root.Q<VisualElement>("Inventory").Children().ToList();
-        slotsVe.ForEach(slotVe => slotVe.Q<Label>("Id").text = (slotsVe.IndexOf(slotVe)+1).ToString());
-        slotsVe[slotsVe.Count-1].Q<Label>("Id").text = "0";
+        slotsVe.ForEach(slotVe => slotVe.Q<Label>("Id").text = (slotsVe.IndexOf(slotVe) + 1).ToString());
+        slotsVe[slotsVe.Count - 1].Q<Label>("Id").text = "0";
+
+        slotsVe.ForEach(slotve =>
+        {
+            int index = slotsVe.IndexOf(slotve);
+            if (index == slotsVe.Count - 1)
+                keyItemMap[KeyCode.Alpha0] = slotve;
+            else
+            {
+                KeyCode keyCode = KeyCode.Alpha1 + index;
+                keyItemMap[keyCode] = slotve;
+            }
+        });
+
 
         slotItemMap = new();
         slotsVe.ForEach((slotVe) => slotItemMap.Add(slotVe, null));
@@ -51,6 +71,9 @@ public class InventoryController : MonoBehaviour
 
     private void Init(WorldManager obj)
     {
+        if(slotItemMap == null)
+            InitSoltItemsMap();
+
         List<ERC1155Balance> items = inventory.GetItems();
 
         items.ToList().ForEach(item => 
@@ -59,6 +82,30 @@ public class InventoryController : MonoBehaviour
             item.balanceChanged += UpdateSlot;
         }
         );
+
+        SelectSlot(inventory.GetEquippedItem());
+    }
+
+    private void SelectSlot(ItemType selectedItemType)
+    {
+        foreach(VisualElement slotVe in slotItemMap.Keys)
+        {
+            ERC1155Balance item = slotItemMap[slotVe];
+            Debug.Log("Null? : " + item == null) ;
+
+            ItemType itemType = (ItemType)Int32.Parse(item.id.ToString());
+
+            if (selectedItemType == itemType)
+            {
+                if (selectedSlot != null)
+                    selectedSlot.RemoveFromClassList("selected");
+
+                slotVe.AddToClassList("selected");
+                selectedSlot = slotVe;
+
+                return;
+            }
+        }
     }
 
     private void UpdateSlot(ERC1155Balance item)
@@ -114,10 +161,31 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("space key was pressed");
-            inventory.Equip((UInt64)ItemType.WateringCan);
-        } 
+        List<KeyCode> keycodes = keyItemMap.Keys.ToList();
+        keycodes.ForEach(keyCode =>
+                                    {
+                                        if (Input.GetKeyDown(keyCode))
+                                        {
+                                            try
+                                            {
+                                                if(keyItemMap.Keys.ToList().Contains(keyCode))
+                                                {
+                                                    VisualElement slotve = keyItemMap[keyCode];
+                                                    ERC1155Balance item = slotItemMap[slotve];
+
+                                                    if(item != null)
+                                                    {
+                                                        ItemType itemtype = (ItemType)Int32.Parse(item.id.ToString());
+
+                                                        inventory.Equip((ulong)item.id);
+                                                        Debug.Log("item type: " + itemtype + " id: " + (ulong)item.id);
+                                                        SelectSlot(itemtype);
+                                                    }
+                                                }
+                                            }
+                                            catch (Exception e) { Debug.LogError(e); }
+
+                                        }
+                                    });
     }
 }

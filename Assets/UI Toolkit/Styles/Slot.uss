@@ -2,7 +2,7 @@
     flex-grow: 1;
     width: 100%;
     height: 100%;
-    background-image: url('project://database/Assets/UI/Sprites/03/PNG/Cell01.png?fileID=21300000&guid=994c988b9d649b64b873ced4e7427886&type=3#Cell01');
+    background-image: url('project://database/Assets/Art/UI/Sprites/03/PNG/Cell01.png?fileID=21300000&guid=994c988b9d649b64b873ced4e7427886&type=3#Cell01');
     padding-top: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
@@ -37,4 +37,15 @@
     bottom: 0;
     right: 0;
     font-size: 22px;
+}
+
+.selected {
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-left-color: rgba(215, 148, 0, 0.72);
+    border-right-color: rgba(215, 148, 0, 0.72);
+    border-top-color: rgba(215, 148, 0, 0.72);
+    border-bottom-color: rgba(215, 148, 0, 0.72);
 }
