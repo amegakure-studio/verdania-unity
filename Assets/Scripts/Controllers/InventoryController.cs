@@ -10,17 +10,16 @@ using UnityEngine.UIElements;
 public class InventoryController : MonoBehaviour
 {
     private InventoryItems itemsData;
-
     private WorldManager m_WorldManager;
     private Inventory inventory;
 
     private Dictionary<VisualElement, ERC1155Balance> slotItemMap;
+    private Dictionary<KeyCode, VisualElement> keyItemMap;
 
     private void OnEnable()
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
         m_WorldManager.OnEntityFeched += Init;
-
         EventManager.Instance.Subscribe(GameEvent.SPAWN_ERC1155BALANCE, HandleItemSpawn);
     }
 
@@ -111,5 +110,14 @@ public class InventoryController : MonoBehaviour
     {
         m_WorldManager.OnEntityFeched -= Init;
         EventManager.Instance.Unsubscribe(GameEvent.SPAWN_ERC1155BALANCE, HandleItemSpawn);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("space key was pressed");
+            inventory.Equip((UInt64)ItemType.WateringCan);
+        } 
     }
 }

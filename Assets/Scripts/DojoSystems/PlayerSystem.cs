@@ -25,4 +25,23 @@ public class PlayerSystem: MonoBehaviour
 
         return call;
     }
+
+    public dojo.Call EquipItem(string playerId, UInt64 itemId, string playerSystemAdress)
+    {
+        Debug.Log("created: " + playerId);
+        var player_id = new FieldElement(playerId).Inner();
+        var item_id = new FieldElement(itemId).Inner();
+
+        dojo.Call call = new()
+        {
+            calldata = new dojo.FieldElement[]
+            {
+                        player_id, item_id
+            },
+            selector = "equip",
+            to = playerSystemAdress
+        };
+
+        return call;
+    }
 }
