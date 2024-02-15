@@ -22,6 +22,11 @@ public class EntityUpdateNotifier : MonoBehaviour
             {
                 EventManager.Instance.Publish(GameEvent.SPAWN_MAPELEMENT, new() { { "Element", model } });
             }
+
+            else if (model.GetType().Equals(typeof(ERC1155Balance)))
+            {
+                EventManager.Instance.Publish(GameEvent.SPAWN_ERC1155BALANCE, new() { { "Item", model } });
+            }
         }
         
     }

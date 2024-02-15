@@ -1,6 +1,7 @@
 using Dojo;
 using Dojo.Starknet;
 using Dojo.Torii;
+using System;
 using System.Numerics;
 using UnityEngine;
 
@@ -18,9 +19,17 @@ public class ERC1155Balance : ModelInstance
     [ModelField("amount")]
     public BigInteger amount;
 
-    //public override void Initialize(Model model)
-    //{
-    //    base.Initialize(model);
-    //    Debug.Log("Item_id: " + id + "\n" + "Amm: " + amount.ToString());
-    //}
+    public event Action<ERC1155Balance> balanceChanged;
+
+    public override void OnUpdate(Model model)
+    {
+        BigInteger oldAmount = amount;
+
+        base.OnUpdate(model);
+
+        if (!oldAmount.Equals(amount)) 
+        {
+            balanceChanged?.Invoke(this);
+        }
+    }
 }

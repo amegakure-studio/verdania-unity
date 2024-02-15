@@ -20,7 +20,20 @@ public class InventoryController : MonoBehaviour
     {
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
         m_WorldManager.OnEntityFeched += Init;
+
+        EventManager.Instance.Subscribe(GameEvent.SPAWN_ERC1155BALANCE, HandleItemSpawn);
     }
+
+    private void HandleItemSpawn(Dictionary<string, object> context)
+    {
+        try
+        {
+            ERC1155Balance item = (ERC1155Balance)context["Item"];
+            UpdateSlot(item);
+
+        }
+        catch (Exception e) { Debug.LogError(e); }
+    }    
 
     void Awake()
     {
@@ -40,7 +53,12 @@ public class InventoryController : MonoBehaviour
     {
         List<ERC1155Balance> items = inventory.GetItems();
 
-        items.ToList().ForEach(item => UpdateSlot(item));
+        items.ToList().ForEach(item => 
+        {
+            UpdateSlot(item);
+            item.balanceChanged += UpdateSlot;
+        }
+        );
     }
 
     private void UpdateSlot(ERC1155Balance item)
@@ -91,5 +109,6 @@ public class InventoryController : MonoBehaviour
     private void OnDisable()
     {
         m_WorldManager.OnEntityFeched -= Init;
+        EventManager.Instance.Unsubscribe(GameEvent.SPAWN_ERC1155BALANCE, HandleItemSpawn);
     }
 }
