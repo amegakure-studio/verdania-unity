@@ -14,12 +14,13 @@ public class LoginController : MonoBehaviour
 
     private void Awake()
     {
-        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
-        updaterSystem = UnityUtils.FindOrCreateComponent<UpdaterSystem>();
+        
     }
 
     private void Start()
     {
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+        updaterSystem = UnityUtils.FindOrCreateComponent<UpdaterSystem>();
         VisualElement root = FindObjectOfType<UIDocument>().rootVisualElement;
 
         usernameTxt = root.Q<TextField>("Username");
