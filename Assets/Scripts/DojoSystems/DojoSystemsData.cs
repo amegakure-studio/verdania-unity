@@ -10,5 +10,6 @@ public class DojoSystemsData : ScriptableObject
     public string farmSystemAdress;
     public string playerSystemAdress;
     public string interactSystemAdress;
+    public string updaterSystemAddress;
 }
 
