@@ -107,6 +107,11 @@ public class MapRenderer : MonoBehaviour
         tile.GetComponentInChildren<Renderer>().material = highlightMaterial;
     }
 
+    public void UnHighlightTile(TileRenderer tile)
+    {
+        tile.GetComponentInChildren<Renderer>().material = defaultMaterial;
+    }
+
     private void Render(WorldManager worldManager)
     {
         Debug.Log("Called?");
@@ -145,6 +150,7 @@ public class MapRenderer : MonoBehaviour
 
                 PlayerController controller = characterGo.AddComponent<PlayerController>();
                 controller.Character = character;
+                controller.PlayerState = playerState;
 
                 EventManager.Instance.Publish(GameEvent.PLAYER_CREATED, new() { { "Player", character } });
             }
@@ -283,8 +289,15 @@ public class MapRenderer : MonoBehaviour
                     Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString + ". dojo coord: " + tileCoordinate +
                         ". tile renderer coord: " + tileRenderer.coordinate);
 
-                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString.Replace(" ", ""));
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString.Replace(" ", ""));                           
                     tileRenderer.OccupyingObject = objectPrefab;
+
+                    EnvEntityT entityType = (EnvEntityT)envEntity.id;
+
+                    if (entityType != EnvEntityT.SuitableForCrop || entityType != EnvEntityT.Rock || entityType != EnvEntityT.Grass)
+                        tileRenderer.Occupied = true;
+                    else
+                        tileRenderer.Occupied = false;
                 }
             }
         }

@@ -33,16 +33,19 @@ public class PathFinder : MonoBehaviour
             {
                 if(closedSet.Contains(neighbor))
                     continue;
-                
-                float costToNeighbor = currentTile.CostFromOrigin + neighbor.TerrainCost + tileDistance;
-                if (costToNeighbor < neighbor.CostFromOrigin || !openSet.Contains(neighbor))
-                {
-                    neighbor.CostFromOrigin = costToNeighbor;
-                    neighbor.CostToDestination = Vector3.Distance(destination.transform.position, neighbor.transform.position);
-                    neighbor.Parent = currentTile;
 
-                    if (!openSet.Contains(neighbor))
-                        openSet.Add(neighbor);
+                if (!neighbor.Occupied)
+                {
+                    float costToNeighbor = currentTile.CostFromOrigin + neighbor.TerrainCost + tileDistance;
+                    if (costToNeighbor < neighbor.CostFromOrigin || !openSet.Contains(neighbor))
+                    {
+                        neighbor.CostFromOrigin = costToNeighbor;
+                        neighbor.CostToDestination = Vector3.Distance(destination.transform.position, neighbor.transform.position);
+                        neighbor.Parent = currentTile;
+
+                        if (!openSet.Contains(neighbor))
+                            openSet.Add(neighbor);
+                    }
                 }
             }
         }
