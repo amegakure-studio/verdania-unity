@@ -26,17 +26,30 @@ public class MapRenderer : MonoBehaviour
         m_WorldManager = GameObject.FindObjectOfType<WorldManager>();
         m_WorldManager.OnEntityFeched += Render;
 
-        EventManager.Instance.Subscribe(GameEvent.SPAWN_MAPELEMENT, HandleSpawnElement);
+        EventManager.Instance.Subscribe(GameEvent.SPAWN_ENVELEMENT, HandleSpawnEnvElement);
+        EventManager.Instance.Subscribe(GameEvent.SPAWN_CROP, HandleSpawnCrop);
     }
 
-    private void HandleSpawnElement(Dictionary<string, object> context)
+    private void HandleSpawnEnvElement(Dictionary<string, object> context)
     {
         try
         {
-            TileState tileState = (TileState)context["Element"];
-            RenderObject(m_WorldManager.Entities(), tileState);
+            EnvEntityState envState = (EnvEntityState)context["Element"];
+            Debug.Log("Env element SPAWNED");
+            createEnvEntities(m_WorldManager.Entities(), envState);
 
         } catch { }
+    }
+
+    private void HandleSpawnCrop(Dictionary<string, object> context)
+    {
+        try
+        {
+            CropState cropState = (CropState)context["Element"];
+            Debug.Log("crop SPAWNED");
+            createCrops(m_WorldManager.Entities(), cropState);
+        }
+        catch { }
     }
 
     void Awake()
@@ -55,6 +68,8 @@ public class MapRenderer : MonoBehaviour
     void OnDisable()
     {
         m_WorldManager.OnEntityFeched -= Render;
+        EventManager.Instance.Unsubscribe(GameEvent.SPAWN_ENVELEMENT, HandleSpawnEnvElement);
+        EventManager.Instance.Unsubscribe(GameEvent.SPAWN_CROP, HandleSpawnCrop);
     }
 
     public TileRenderer GetTileRenderer(Vector2Int coordinate)
@@ -154,6 +169,11 @@ public class MapRenderer : MonoBehaviour
         }
     }
 
+    private void OnTileStateChanged(TileState tileState)
+    {
+        RenderObject(m_WorldManager.Entities(), tileState);
+    }
+
     private void RenderObjects(WorldManager worldManager)
     {
         GameObject[] entities = worldManager.Entities();
@@ -161,7 +181,7 @@ public class MapRenderer : MonoBehaviour
         
         foreach(TileState tileState in tileStates)
         {
-            tileState.TileStateChanged += (ts) => RenderObject(entities, ts);
+            tileState.TileStateChanged += OnTileStateChanged;
             RenderObject(entities, tileState);
         }
 
@@ -199,12 +219,14 @@ public class MapRenderer : MonoBehaviour
     {
         if ((TileStateT)tileState.entityType == TileStateT.Crop)
         {
-            createCrops(entities, tileState);
+            CropState cropState = m_Finder.GetCropStateByIndex(tileState.farmId, tileState.entityIndex, entities);
+            createCrops(entities, cropState);
         }
 
         if ((TileStateT)tileState.entityType == TileStateT.Enviroment)
         {
-            createEnvEntities(entities, tileState);
+            EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(tileState.farmId, tileState.entityIndex, entities);
+            createEnvEntities(entities, envEntityState);
         }
     }
 
@@ -223,15 +245,14 @@ public class MapRenderer : MonoBehaviour
         tileRenderer.AddObject(cropPrefab);
     }
 
-    private void createEnvEntities(GameObject[] entities, TileState tileState)
+    private void createEnvEntities(GameObject[] entities, EnvEntityState envEntityState)
     {
-        EnvEntityState envEntityState = m_Finder.GetEnvEntityStateByIndex(tileState.farmId, tileState.entityIndex, entities);
 
         if (envEntityState != null)
         {
-            //Debug.Log("index: " + envEntityState.index);
-            //Debug.Log("envEntityid: " + envEntityState.envEntityId);
-            //Debug.Log("x: " + envEntityState.x + "y: " + envEntityState.y);
+            Debug.Log("index: " + envEntityState.index);
+            Debug.Log("envEntityid: " + envEntityState.envEntityId);
+            Debug.Log("x: " + envEntityState.x + "y: " + envEntityState.y);
 
             Vector2Int tileCoordinate = new((int)envEntityState.x, (int)envEntityState.y);
 
@@ -245,9 +266,10 @@ public class MapRenderer : MonoBehaviour
 
                     string nameString = HexToString(envEntity.entityName.Hex());
 
-                    //Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString);
+                    Debug.Log("HEX: " + envEntity.entityName.Hex() + " Name: " + nameString + ". dojo coord: " + tileCoordinate +
+                        ". tile renderer coord: " + tileRenderer.coordinate);
 
-                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString);
+                    GameObject objectPrefab = Resources.Load<GameObject>(folderResourcesConfig.objectsFolder + nameString.Replace(" ", ""));
                     tileRenderer.OccupyingObject = objectPrefab;
                 }
             }
@@ -292,12 +314,11 @@ public class MapRenderer : MonoBehaviour
         return stringValue;
     }
 
-    private void createCrops(GameObject[] entities, TileState tileState)
-    {
-        CropState cropState = m_Finder.GetCropStateByIndex(tileState.farmId, tileState.entityIndex, entities);
-        Debug.Log("Pos: " + cropState.x + cropState.y);
+    private void createCrops(GameObject[] entities, CropState cropState)
+    {       
         if (cropState != null)
         {
+            Debug.Log("Pos: " + cropState.x + cropState.y);
             Vector2Int tileCoordinate = new((int)cropState.x, (int)cropState.y);
 
             if (m_TileRenderers.ContainsKey(tileCoordinate))
@@ -308,7 +329,7 @@ public class MapRenderer : MonoBehaviour
                 {
                     TileRenderer tileRenderer = m_TileRenderers[tileCoordinate];
 
-                    Debug.Log(crop.name);
+                    
                     string growId = "";
 
                     if(cropState.growingProgress < 25)
@@ -320,11 +341,14 @@ public class MapRenderer : MonoBehaviour
                     else if (cropState.growingProgress == 100)
                         growId = "100";
 
-                    string landPath = folderResourcesConfig.objectsFolder + "SuitableForCrop";
+                    string landPath = folderResourcesConfig.objectsFolder + "Suitableforcrop";
                     GameObject landPrefab = Resources.Load<GameObject>(landPath);
                     tileRenderer.OccupyingObject = landPrefab;
 
-                    string cropPath = folderResourcesConfig.cropsFolder + crop.name + "/" + crop.name + "_" + growId;
+                    string cropNameString = HexToString(crop.cropName.Hex());
+                    Debug.Log("Cropname: " + cropNameString);
+
+                    string cropPath = folderResourcesConfig.cropsFolder + cropNameString + "/" + cropNameString + "_" + growId;
                     GameObject cropPrefab = Resources.Load<GameObject>(cropPath);
                     tileRenderer.AddObject(cropPrefab);
                 }

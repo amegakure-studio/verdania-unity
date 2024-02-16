@@ -54,14 +54,16 @@ namespace Amegakure.Verdania.GridSystem
         { get => occupyingObject;
             set 
             { 
-                if (occupyingObject != null)
-                {
-                    foreach (Transform child in transform)
-                    { Destroy(child.gameObject); }
-                }
+                //if (occupyingObject != null)
+                //{
+                //    foreach (Transform child in transform)
+                //    { Destroy(child.gameObject); }
+                //}
 
-                InstantiateObject(value);
-                occupyingObject = value; 
+                GameObject obj = InstantiateObject(value);
+
+                if (obj != null)
+                    occupyingObject = obj; 
             } 
         }
 
@@ -70,7 +72,7 @@ namespace Amegakure.Verdania.GridSystem
             InstantiateObject(prefab);
         }
 
-        private void InstantiateObject(GameObject prefab)
+        private GameObject InstantiateObject(GameObject prefab)
         {
             if (prefab != null)
             {
@@ -96,7 +98,11 @@ namespace Amegakure.Verdania.GridSystem
                             oldScale.y * inverseScale.y,
                             oldScale.z * inverseScale.z
                         );
+
+                return prefabGO;
             }
+
+            return null;
         }
 
         public Vector2Int Coordinate { get => coordinate; set => coordinate = value; }

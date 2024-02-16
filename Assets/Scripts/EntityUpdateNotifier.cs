@@ -14,13 +14,21 @@ public class EntityUpdateNotifier : MonoBehaviour
 
     private void HandleEntitySpawned(GameObject go)
     {
+        Debug.Log("Entity spawn: " );
         ModelInstance[] models = go.GetComponents<ModelInstance>();
 
         foreach (ModelInstance model in models)
         {
-            if (model.GetType().Equals(typeof(TileState)))
+            Debug.Log("TyPE: " + model.GetType());
+            if (model.GetType().Equals(typeof(EnvEntityState)))
             {
-                EventManager.Instance.Publish(GameEvent.SPAWN_MAPELEMENT, new() { { "Element", model } });
+                Debug.Log("New Env state!!!!");
+                EventManager.Instance.Publish(GameEvent.SPAWN_ENVELEMENT, new() { { "Element", model } });
+            }
+
+            else if (model.GetType().Equals(typeof(CropState)))
+            {
+                EventManager.Instance.Publish(GameEvent.SPAWN_CROP, new() { { "Element", model } });
             }
 
             else if (model.GetType().Equals(typeof(ERC1155Balance)))

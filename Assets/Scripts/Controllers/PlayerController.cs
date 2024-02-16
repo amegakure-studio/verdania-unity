@@ -5,7 +5,6 @@ using Amegakure.Verdania.GridSystem;
 using Dojo;
 using dojo_bindings;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private WorldManager worldManager;
     private InteractSystem interactSystem;
     private DojoSystem dojoSystem;
+    private InventoryItems inventoryItems;
+    private Inventory inventory;
 
     public Character Character { get => character; set => character = value; }
 
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
         map = GameObject.FindObjectOfType<MapRenderer>();
         interactSystem = UnityUtils.FindOrCreateComponent<InteractSystem>();
         dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+        inventoryItems = Resources.Load<InventoryItems>("InventoryItems");
+        inventory = GameObject.FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -47,15 +50,6 @@ public class PlayerController : MonoBehaviour
 
             if (clickType != null)
                 HandleClick(clickType);
-
-            if (Input.GetKeyDown(KeyCode.K))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_HOE, new() { { "Character", Character.gameObject } });
-
-            else if (Input.GetKeyDown(KeyCode.L))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_PLANT, new() { { "Character", Character.gameObject } });
-
-            else if (Input.GetKeyDown(KeyCode.J))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_WATER, new() { { "Character", Character.gameObject } });
         }
     }
 
@@ -89,8 +83,14 @@ public class PlayerController : MonoBehaviour
                 dojo.Call interactCall = interactSystem.Interact(character.DojoId, mapTile.id, dojoSystem.Systems.interactSystemAdress);
 
                 try
-                {
+                {                
                     dojoSystem.ExecuteCalls(new[] { interactCall });
+
+                    foreach (InventoryItems.ItemMap item in inventoryItems.items)
+                    {
+                        if (item.itemType == inventory.GetEquippedItem())
+                            EventManager.Instance.Publish(item.interactEvent, new() { { "Character", Character.gameObject } });
+                    }
                 }
                 catch (Exception e)
                 {

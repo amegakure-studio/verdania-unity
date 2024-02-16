@@ -96,8 +96,7 @@ public class CharacterAnimation : MonoBehaviour
 
             else
             {
-                Animator animator = characterAnimatorMap[character];
-                ActivateTool("Bag", character);  
+                Animator animator = characterAnimatorMap[character];  
                 animator.SetTrigger("Plant");
             }
         }
@@ -123,7 +122,6 @@ public class CharacterAnimation : MonoBehaviour
             else
             {
                 Animator animator = characterAnimatorMap[character];
-                ActivateTool("Hoe", character);
                 animator.SetTrigger("Hoe");
             }
         }
@@ -150,7 +148,6 @@ public class CharacterAnimation : MonoBehaviour
             else
             {
                 Animator animator = characterAnimatorMap[character];
-                ActivateTool("WateringCan", character);
                 animator.SetTrigger("Water");
             }
         }
