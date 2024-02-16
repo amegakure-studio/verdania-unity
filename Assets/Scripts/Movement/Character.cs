@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Amegakure.Verdania.GridSystem;
 using Dojo;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -66,6 +67,14 @@ public class Character : MonoBehaviour
     {
         //playerFinder = UnityUtils.FindOrCreateComponent<PlayerFinder>();
         //worldManager = GameObject.FindObjectOfType<WorldManager>();
+    }
+
+    public bool IsMoving()
+    {
+        if (PathVectorList == null)
+            return false;
+
+        return CurrentPathIndex < PathVectorList.Count;
     }
 
     public void HandleMovement()

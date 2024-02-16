@@ -11,5 +11,6 @@ public class DojoSystemsData : ScriptableObject
     public string playerSystemAdress;
     public string interactSystemAdress;
     public string updaterSystemAddress;
+    public string jpsSystemAddress;
 }
 
