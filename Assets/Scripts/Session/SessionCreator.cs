@@ -14,13 +14,14 @@ public class SessionCreator : MonoBehaviour
     private FarmSystem farmSystem;
     private PlayerSystem skinSystem;
     private DojoSystem dojoSystem;
-    private bool playerCreated = false;
+    private UpdaterSystem updaterSystem;
 
     private void Awake()
     {
         farmSystem = UnityUtils.FindOrCreateComponent<FarmSystem>();
         skinSystem = UnityUtils.FindOrCreateComponent<PlayerSystem>();
         dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+        updaterSystem = UnityUtils.FindOrCreateComponent<UpdaterSystem>();
     }
 
     // public async Task<Session> Create(string username, string password)
@@ -99,7 +100,8 @@ public class SessionCreator : MonoBehaviour
 
             dojo.Call skinCall = skinSystem.CreatePlayer(playerId, usernameHex, gender, dojoSystem.Systems.playerSystemAdress);
             dojo.Call farmCall = farmSystem.CreateFarm(playerId, dojoSystem.Systems.farmSystemAdress);
-
+            dojo.Call updaterCall = updaterSystem.Connect(playerId, dojoSystem.Systems.updaterSystemAddress);
+            
             try
             {
                 dojoSystem.ExecuteCalls(new[] { skinCall, farmCall});

@@ -1,3 +1,4 @@
+using dojo_bindings;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,9 +9,18 @@ public class LoginController : MonoBehaviour
     private TextField passwordTxt;
     private Button loginBtn;
     private Button signUpBtn;
+    private DojoSystem dojoSystem;
+    private UpdaterSystem updaterSystem;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+        updaterSystem = UnityUtils.FindOrCreateComponent<UpdaterSystem>();
         VisualElement root = FindObjectOfType<UIDocument>().rootVisualElement;
 
         usernameTxt = root.Q<TextField>("Username");
@@ -36,11 +46,23 @@ public class LoginController : MonoBehaviour
             SessionCreator sessionCreator = UnityUtils.FindOrCreateComponent<SessionCreator>();    
             Session session = sessionCreator.GetSessionFromExistingPlayer(usernameTxt.text, passwordTxt.text);
 
-            
+
             if (session != null)
             {
-                SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
-                sceneLoader.LoadScene(2);
+                try
+                {
+                    dojo.Call updaterCall = updaterSystem.Connect(session.PlayerId.Hex(), dojoSystem.Systems.updaterSystemAddress);
+                    dojoSystem.ExecuteCalls(new[] { updaterCall });
+
+                    SceneLoader sceneLoader = UnityUtils.FindOrCreateComponent<SceneLoader>();
+                    sceneLoader.LoadScene(2);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
+
+               
             }
             // TODO: Emmit an event to show some feedback to the user.
 

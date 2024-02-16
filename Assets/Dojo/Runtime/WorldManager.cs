@@ -48,7 +48,7 @@ namespace Dojo
             PrivateKey = new SigningKey(dojoConfig.privateKey);
             PlayerAddress = dojoConfig.playerAddress;
             SynchronizationMaster = GetComponent<SynchronizationMaster>();
-
+            Debug.Log("Before torii");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             wasmClient = new ToriiWasmClient(toriiUrl, rpcUrl, relayWebrtcUrl, worldAddress);
@@ -56,7 +56,7 @@ namespace Dojo
 #else
             toriiClient = new ToriiClient(ToriiUrl, RpcUrl, RelayUrl, WorldAddress);
 #endif
-
+            Debug.Log("After torii");
 
             // fetch entities from the world
             // TODO: maybe do in the start function of the SynchronizationMaster?
