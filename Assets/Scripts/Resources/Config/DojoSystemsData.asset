@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6533d988f54366549804f6246ef766a0, type: 3}
   m_Name: DojoSystemsData
   m_EditorClassIdentifier: 
-  mapSystemAdress: 0x4f2f920eb39b363357742752ab970dc7cc60b6132aefd9edd2f5335a6f61bdb
-  farmSystemAdress: 0x627f6f6a532be2c033426b83c325f37996b64fd98723355095cf15d5df27703
-  playerSystemAdress: 0x56522e594b2804e061828afb32f0b757254a1bd8b8e202e3c01dd11e90b712a
+  mapSystemAdress: 0x58a5c49e52e280745b766e0027999855373fb1434da627de7d75ce9fc73c2bd
+  farmSystemAdress: 0x102c1068a32acfa64c781a27104ba4ada1f2227c17b5c0d65329c5cbef2efe7
+  playerSystemAdress: 0x3d3aa6bb06e3c889159926846814e2864875f7b9abc741e683f0f2e69034222
+  interactSystemAdress: 0x56f24b92f98f5651958a738fc42961824c89d95e5e3ee49a4036f1d6d14e9ef

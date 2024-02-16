@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public class FarmSystem: MonoBehaviour
 {
-    public dojo.Call CreateFarm(string playerId, string farmSystemAdress)
+    public dojo.Call CreateFarm(string playerId, string farmSystemAddress)
     {
         Debug.Log("created: " + playerId);
         var player_id = new FieldElement(playerId).Inner();
@@ -19,7 +19,7 @@ public class FarmSystem: MonoBehaviour
                         player_id
             },
             selector = "create_farm",
-            to = farmSystemAdress
+            to = farmSystemAddress
         };
 
         return call;

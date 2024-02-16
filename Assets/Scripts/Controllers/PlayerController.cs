@@ -1,18 +1,42 @@
 using System;
 using System.Collections.Generic;
+using Amegakure.Verdania.DojoModels;
 using Amegakure.Verdania.GridSystem;
+using Dojo;
+using dojo_bindings;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PathFinder pathFinder;
     private Character character;
+    private MapRenderer map;
+    private WorldManager worldManager;
+    private InteractSystem interactSystem;
+    private DojoSystem dojoSystem;
+    private InventoryItems inventoryItems;
+    private Inventory inventory;
 
     public Character Character { get => character; set => character = value; }
+
+    private void OnEnable()
+    {
+        worldManager = GameObject.FindObjectOfType<WorldManager>();
+    }
+
+    private void Start()
+    {
+        GetPlayerAdjacentTiles().ForEach(tile => map.HighlightTile(tile));
+    }
 
     private void Awake()
     {
         pathFinder = GameObject.FindObjectOfType<PathFinder>();
+        map = GameObject.FindObjectOfType<MapRenderer>();
+        interactSystem = UnityUtils.FindOrCreateComponent<InteractSystem>();
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
+        inventoryItems = Resources.Load<InventoryItems>("InventoryItems");
+        inventory = GameObject.FindObjectOfType<Inventory>();
     }
 
     void Update()
@@ -26,15 +50,6 @@ public class PlayerController : MonoBehaviour
 
             if (clickType != null)
                 HandleClick(clickType);
-
-            if (Input.GetKeyDown(KeyCode.K))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_HOE, new() { { "Character", Character.gameObject } });
-
-            else if (Input.GetKeyDown(KeyCode.L))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_PLANT, new() { { "Character", Character.gameObject } });
-
-            else if (Input.GetKeyDown(KeyCode.J))
-                EventManager.Instance.Publish(GameEvent.CHARACTER_WATER, new() { { "Character", Character.gameObject } });
         }
     }
 
@@ -49,7 +64,39 @@ public class PlayerController : MonoBehaviour
             TileRenderer tile = hit.collider.GetComponent<TileRenderer>();
             if (tile != null)
             {
-                SetTargetPosition(tile);
+                if (clickType == "Left")
+                    SetTargetPosition(tile);
+                else
+                    Interact(tile);
+            }
+        }
+    }
+
+    private void Interact(TileRenderer targetTile)
+    {
+        if (GetPlayerAdjacentTiles().Contains(targetTile))
+        {
+            Tile mapTile = map.GetMapTile(targetTile.coordinate);
+            
+            if (mapTile != null) 
+            {
+                dojo.Call interactCall = interactSystem.Interact(character.DojoId, mapTile.id, dojoSystem.Systems.interactSystemAdress);
+
+                try
+                {                
+                    dojoSystem.ExecuteCalls(new[] { interactCall });
+
+                    foreach (InventoryItems.ItemMap item in inventoryItems.items)
+                    {
+                        if (item.itemType == inventory.GetEquippedItem())
+                            EventManager.Instance.Publish(item.interactEvent, new() { { "Character", Character.gameObject } });
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    throw new Exception("Couldn't interact");
+                }
             }
         }
     }
@@ -64,5 +111,32 @@ public class PlayerController : MonoBehaviour
             
             Character.PathVectorList = tiles;
         }
+    }
+
+    private List<TileRenderer> GetPlayerAdjacentTiles()
+    {
+        List<TileRenderer> tiles = new();
+
+        Vector2Int originCoordinate = character.CurrentTile.coordinate;
+        List<Vector2Int> directions = new() 
+        { 
+            new Vector2Int(0,1),
+            new Vector2Int(0,-1),
+            new Vector2Int(1,0),
+            new Vector2Int(-1,0)
+        };
+
+        foreach (Vector2Int direction in directions) 
+        { 
+            Vector2Int adjacentCoordinate = originCoordinate + direction;
+            TileRenderer adjacentTile = map.GetTileRenderer(adjacentCoordinate);
+
+            if (adjacentTile)
+                tiles.Add(adjacentTile);
+        }
+
+        tiles.Add(map.GetTileRenderer(originCoordinate));
+
+        return tiles;
     }
 }

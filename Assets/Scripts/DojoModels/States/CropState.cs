@@ -1,5 +1,7 @@
 using Dojo;
+using Dojo.Torii;
 using System;
+using UnityEngine;
 
 public class CropState : ModelInstance
 {
@@ -29,4 +31,10 @@ public class CropState : ModelInstance
 
     [ModelField("harvested")]
     public bool harvested;
+
+    public override void Initialize(Model model)
+    {
+        base.Initialize(model);
+        //Debug.Log("Crop pos:" + index + "coord: " + x + "," + y);
+    }
 }

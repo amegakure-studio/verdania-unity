@@ -24,7 +24,7 @@ public class PlayerSystem: MonoBehaviour
         return call;
     }
 
-    public dojo.Call EquipItem(string playerId, UInt64 itemId, string playerSystemAdress)
+    public dojo.Call EquipItem(string playerId, UInt64 itemId, string playerSystemAddress)
     {
         var player_id = new FieldElement(playerId).Inner();
         var item_id = new FieldElement(itemId.ToString("X")).Inner();
@@ -37,7 +37,7 @@ public class PlayerSystem: MonoBehaviour
                         player_id, item_id
             },
             selector = "equip",
-            to = playerSystemAdress
+            to = playerSystemAddress
         };
 
         return call;
