@@ -39,7 +39,6 @@ public class Character : MonoBehaviour
     [SerializeField] ItemGoBinding[] itemsGo;
 
     private PlayerFinder playerFinder;
-    private Session session;
     private WorldManager worldManager;
 
     public List<TileRenderer> PathVectorList
@@ -66,7 +65,6 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         //playerFinder = UnityUtils.FindOrCreateComponent<PlayerFinder>();
-        //session = GameObject.FindObjectOfType<Session>();
         //worldManager = GameObject.FindObjectOfType<WorldManager>();
     }
 

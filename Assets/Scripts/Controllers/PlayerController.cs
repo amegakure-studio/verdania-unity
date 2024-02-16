@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Amegakure.Verdania.DojoModels;
 using Amegakure.Verdania.GridSystem;
 using Dojo;
+using dojo_bindings;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,18 +13,14 @@ public class PlayerController : MonoBehaviour
     private Character character;
     private MapRenderer map;
     private WorldManager worldManager;
+    private InteractSystem interactSystem;
+    private DojoSystem dojoSystem;
 
     public Character Character { get => character; set => character = value; }
 
     private void OnEnable()
     {
         worldManager = GameObject.FindObjectOfType<WorldManager>();
-        //worldManager.OnEntityFeched += WorldManager_OnEntityFeched;
-    }
-
-    private void OnDisable()
-    {
-        //worldManager.OnEntityFeched -= WorldManager_OnEntityFeched;
     }
 
     private void Start()
@@ -33,6 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         pathFinder = GameObject.FindObjectOfType<PathFinder>();
         map = GameObject.FindObjectOfType<MapRenderer>();
+        interactSystem = UnityUtils.FindOrCreateComponent<InteractSystem>();
+        dojoSystem = UnityUtils.FindOrCreateComponent<DojoSystem>();
     }
 
     void Update()
@@ -69,7 +70,33 @@ public class PlayerController : MonoBehaviour
             TileRenderer tile = hit.collider.GetComponent<TileRenderer>();
             if (tile != null)
             {
-                SetTargetPosition(tile);
+                if (clickType == "Left")
+                    SetTargetPosition(tile);
+                else
+                    Interact(tile);
+            }
+        }
+    }
+
+    private void Interact(TileRenderer targetTile)
+    {
+        if (GetPlayerAdjacentTiles().Contains(targetTile))
+        {
+            Tile mapTile = map.GetMapTile(targetTile.coordinate);
+            
+            if (mapTile != null) 
+            {
+                dojo.Call interactCall = interactSystem.Interact(character.DojoId, mapTile.id, dojoSystem.Systems.interactSystemAdress);
+
+                try
+                {
+                    dojoSystem.ExecuteCalls(new[] { interactCall });
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    throw new Exception("Couldn't interact");
+                }
             }
         }
     }
@@ -102,13 +129,13 @@ public class PlayerController : MonoBehaviour
         foreach (Vector2Int direction in directions) 
         { 
             Vector2Int adjacentCoordinate = originCoordinate + direction;
-            TileRenderer adjacentTile = map.GetTile(adjacentCoordinate);
+            TileRenderer adjacentTile = map.GetTileRenderer(adjacentCoordinate);
 
             if (adjacentTile)
                 tiles.Add(adjacentTile);
         }
 
-        tiles.Add(map.GetTile(originCoordinate));
+        tiles.Add(map.GetTileRenderer(originCoordinate));
 
         return tiles;
     }

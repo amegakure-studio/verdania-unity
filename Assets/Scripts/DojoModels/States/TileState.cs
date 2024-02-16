@@ -2,6 +2,7 @@ using Dojo;
 using Dojo.Torii;
 using System;
 using Unity.VisualScripting;
+using UnityEngine;
 
 public class TileState : ModelInstance
 {
@@ -19,15 +20,25 @@ public class TileState : ModelInstance
 
     public event Action<TileState> TileStateChanged;
 
+    public override void Initialize(Model model)
+    {
+        base.Initialize(model);
+        //Debug.Log("Type: " + entityType + " Index: " + entityIndex);
+    }
+
     public override void OnUpdate(Model model)
     {
+        
         UInt64 oldEntityType = entityType;
         UInt64 oldEntityIndex = entityIndex;
 
         base.OnUpdate(model);
 
-        if (oldEntityType != entityType || oldEntityIndex != entityIndex) 
+        if (oldEntityType != entityType || oldEntityIndex != entityIndex)
+        {
+            Debug.Log("Tile changed: " + id);
             TileStateChanged?.Invoke(this);
+        }
     }
 }
 

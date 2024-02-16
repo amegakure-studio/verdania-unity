@@ -15,6 +15,7 @@ public class MapRenderer : MonoBehaviour
     private Session m_Session;
     private MapFinder m_Finder;
     private Dictionary<Vector2Int, TileRenderer> m_TileRenderers;
+    private Dictionary<Vector2Int, Tile> mapTiles;
 
     [Header("Tiles")]
     [SerializeField] Material defaultMaterial;
@@ -48,6 +49,7 @@ public class MapRenderer : MonoBehaviour
         m_Session = GameObject.FindObjectOfType<Session>();
 
         m_Finder = GameObject.FindObjectOfType<MapFinder>();
+        mapTiles = new();
     }
 
     void OnDisable()
@@ -55,10 +57,18 @@ public class MapRenderer : MonoBehaviour
         m_WorldManager.OnEntityFeched -= Render;
     }
 
-    public TileRenderer GetTile(Vector2Int coordinate)
+    public TileRenderer GetTileRenderer(Vector2Int coordinate)
     {
         if (m_TileRenderers.ContainsKey(coordinate))
             return m_TileRenderers[coordinate];
+
+        else return null;
+    }
+
+    public Tile GetMapTile(Vector2Int coordinate)
+    {
+        if (mapTiles.ContainsKey(coordinate))
+            return mapTiles[coordinate];
 
         else return null;
     }
@@ -120,6 +130,8 @@ public class MapRenderer : MonoBehaviour
         foreach (Tile tile in tiles) 
         {
             Vector2Int tileCoordinate = new((int)tile.x, (int)tile.y);
+
+            mapTiles[tileCoordinate] = tile;
 
             if (m_TileRenderers.ContainsKey(tileCoordinate))
             {
@@ -283,7 +295,7 @@ public class MapRenderer : MonoBehaviour
     private void createCrops(GameObject[] entities, TileState tileState)
     {
         CropState cropState = m_Finder.GetCropStateByIndex(tileState.farmId, tileState.entityIndex, entities);
-
+        Debug.Log("Pos: " + cropState.x + cropState.y);
         if (cropState != null)
         {
             Vector2Int tileCoordinate = new((int)cropState.x, (int)cropState.y);

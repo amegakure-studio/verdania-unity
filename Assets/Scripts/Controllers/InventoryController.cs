@@ -113,13 +113,18 @@ public class InventoryController : MonoBehaviour
     {
         List<VisualElement> slotsVe = slotItemMap.Keys.ToList();
 
-        foreach(VisualElement slotVe in slotsVe)
+        if (item.amount < 1)
+        {
+            return;
+        }
+
+            foreach (VisualElement slotVe in slotsVe)
         {
             if (slotItemMap[slotVe] != null && slotItemMap[slotVe].id == item.id)
             {
                 slotVe.Q<Label>("Quantity").text = item.amount.ToString();
 
-                if (item.amount == 0)
+                if (item.amount < 1)
                 {
                     slotVe.Q<VisualElement>("Item").style.backgroundImage = null;
                     slotVe.Q<Label>("Quantity").text = "";

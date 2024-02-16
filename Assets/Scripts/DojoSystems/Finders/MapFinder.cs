@@ -49,8 +49,13 @@ public class MapFinder : MonoBehaviour
 
             if (cropState != null)
             {
-                if (cropState.farmId == farmId && cropState.index == index)
+                Debug.Log("Cropstate: Farm: " + farmId +  " index: " + cropState.index);
+                if (cropState.farmId.Equals(farmId) && cropState.index.Equals(index))
+                {
+                    Debug.Log("Found: " + cropState.x + cropState.y);
                     return cropState;
+                }
+                    
             }
         }
 
