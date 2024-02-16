@@ -32,9 +32,24 @@ public class CropState : ModelInstance
     [ModelField("harvested")]
     public bool harvested;
 
-    public override void Initialize(Model model)
+    [ModelField("watered")]
+    public bool watered;
+
+    public Action<CropState> cropChanged;
+
+    public override void OnUpdate(Model model)
     {
-        base.Initialize(model);
-        //Debug.Log("Crop pos:" + index + "coord: " + x + "," + y);
+        bool oldWatered = watered;
+        UInt64 oldGrowingProgress = growingProgress;
+        bool oldHarvested = harvested;
+
+        base.OnUpdate(model);
+
+        if (oldWatered != watered || oldGrowingProgress != growingProgress || oldHarvested != harvested)
+        {
+            Debug.Log("CROP CHANGED EVENT EMITTED");
+            cropChanged?.Invoke(this);
+        }
     }
+
 }

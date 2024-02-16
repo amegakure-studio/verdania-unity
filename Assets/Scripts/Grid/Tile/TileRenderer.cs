@@ -53,17 +53,20 @@ namespace Amegakure.Verdania.GridSystem
         public GameObject OccupyingObject 
         { get => occupyingObject;
             set 
-            { 
-                //if (occupyingObject != null)
-                //{
-                //    foreach (Transform child in transform)
-                //    { Destroy(child.gameObject); }
-                //}
+            {
+                if (occupyingObject != null)
+                {
+                    foreach (Transform child in transform)
+                    { Destroy(child.gameObject); }
+                }
 
-                GameObject obj = InstantiateObject(value);
+                if (value != null)
+                {
+                    GameObject obj = InstantiateObject(value);
 
-                if (obj != null)
-                    occupyingObject = obj; 
+                    if (obj != null)
+                        occupyingObject = obj;
+                }               
             } 
         }
 

@@ -61,3 +61,27 @@ MonoBehaviour:
     itemPrefab: {fileID: 2766088583055928845, guid: 0ddb123373c35374ab921a5e71f95277,
       type: 3}
     interactEvent: 2
+  - itemType: 2000
+    itemName: Pumpkin
+    itemIcon: {fileID: 21300000, guid: 9c27271e251cf824b85c9a1bdc259be1, type: 3}
+    itemPrefab: {fileID: 6015492209393542623, guid: d99ce2b3dd6371ab8b18cb4fa42a5489,
+      type: 3}
+    interactEvent: 2
+  - itemType: 2001
+    itemName: Onion
+    itemIcon: {fileID: 21300000, guid: 5fb0a95607246cb4a964572edf9d8793, type: 3}
+    itemPrefab: {fileID: 5419776949260734142, guid: 2fc6a1bb91b352247abc80129bc6ed05,
+      type: 3}
+    interactEvent: 2
+  - itemType: 2002
+    itemName: Carrot
+    itemIcon: {fileID: 21300000, guid: 422e8b7898186bc41aac100fbcd962cd, type: 3}
+    itemPrefab: {fileID: 3432394798002747693, guid: 02bc57ee2d3ef541eae8ba98fe489794,
+      type: 3}
+    interactEvent: 2
+  - itemType: 2003
+    itemName: Corn
+    itemIcon: {fileID: 21300000, guid: 07a4c84207ed7144d98eb064ac6a2fae, type: 3}
+    itemPrefab: {fileID: 2506037539060855009, guid: 114e1b7379d160f559dfcbf25cc6f20e,
+      type: 3}
+    interactEvent: 2
