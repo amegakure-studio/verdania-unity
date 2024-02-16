@@ -28,6 +28,20 @@ public class MapRenderer : MonoBehaviour
 
         EventManager.Instance.Subscribe(GameEvent.SPAWN_ENVELEMENT, HandleSpawnEnvElement);
         EventManager.Instance.Subscribe(GameEvent.SPAWN_CROP, HandleSpawnCrop);
+        EventManager.Instance.Subscribe(GameEvent.SPAWN_TILESTATE, HandleTileStateSpawn);
+    }
+
+    private void HandleTileStateSpawn(Dictionary<string, object> obj)
+    {
+        try
+        {
+            TileState tileState = (TileState)obj["Element"];
+
+            tileState.TileStateChanged += OnTileStateChanged;
+            RenderObject(m_WorldManager.Entities(), tileState);
+        }
+        catch (Exception e) { }
+        
     }
 
     private void HandleSpawnEnvElement(Dictionary<string, object> context)

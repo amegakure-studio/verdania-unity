@@ -19,8 +19,12 @@ public class EntityUpdateNotifier : MonoBehaviour
 
         foreach (ModelInstance model in models)
         {
-            Debug.Log("TyPE: " + model.GetType());
-            if (model.GetType().Equals(typeof(EnvEntityState)))
+            if (model.GetType().Equals(typeof(TileState)))
+            {
+                EventManager.Instance.Publish(GameEvent.SPAWN_TILESTATE, new() { { "Element", model } });
+            }
+
+            else if (model.GetType().Equals(typeof(EnvEntityState)))
             {
                 Debug.Log("New Env state!!!!");
                 EventManager.Instance.Publish(GameEvent.SPAWN_ENVELEMENT, new() { { "Element", model } });
